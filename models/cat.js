@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const gallerySchema = new mongoose.Schema({
   description: { type: String },
-  image: {type: String, required: true },
+  image: {type: String },
   owner: { type: mongoose.Schema.ObjectId, ref: 'User' }
 });
 

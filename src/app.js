@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-// import Routes from './components/common/Routes';
-// import Navbar from './components/common/Navbar';
+import Routes from './components/utility/Routes';
+import Navbar from './components/common/Navbar';
 
+import 'bootstrap/dist/css/bootstrap.css';
 import './scss/style.scss';
 
 
@@ -14,8 +15,8 @@ class App extends React.Component {
       <Router>
 
         <main className="container-fluid">
-          {/* <Navbar />
-          <Routes /> */}
+          <Navbar />
+          <Routes />
         </main>
       </Router>
     );

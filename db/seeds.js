@@ -87,7 +87,7 @@ mongoose.connect(dbURI, { useMongoClient: true })
                 type: 'Persian British short hair',
                 gallery: [{
                   description: 'Do you have treats!?',
-                  image: '/images/cece.jpg'
+                  image: 'assets/images/cece.jpg'
                 }],
                 owner: users[0]
               }, {
@@ -97,7 +97,7 @@ mongoose.connect(dbURI, { useMongoClient: true })
                 type: 'Persian British short hair',
                 gallery: [{
                   description: 'Sitting pretty.',
-                  image: '/images/toki.jpg'
+                  image: 'assets/images/toki.jpg'
                 }],
                 owner: users[1]
               }, {
@@ -107,7 +107,7 @@ mongoose.connect(dbURI, { useMongoClient: true })
                 type: 'Persian',
                 gallery: [{
                   description: 'Look at me',
-                  image: '/images/crookshanks.jpg'
+                  image: 'assets/images/crookshanks.jpg'
                 }],
                 owner: users[2]
               }])
