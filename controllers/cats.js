@@ -31,41 +31,41 @@ function catsShow(req, res, next) {
     })
     .catch(next);
 }
-//
-// function catsUpdate(req, res, next) {
-//
-//   if(req.file) req.body.image = req.file.filename;
-//
-//   Cat
-//     .findById(req.params.id)
-//     .populate('owner')
-//     .exec()
-//     .then((cat) => {
-//       if(!cat) return res.notFound();
-//       cat = Object.assign(cat, req.body);
-//       return cat.save();
-//     })
-//     .then(cat => res.json(cat))
-//     .catch(next);
-// }
-//
-// function catsDelete(req, res, next) {
-//   Cat
-//     .findById(req.params.id)
-//     .populate('owner')
-//     .exec()
-//     .then((cat) => {
-//       if(!cat) return res.notFound();
-//       return cat.remove();
-//     })
-//     .then(() => res.status(204).end())
-//     .catch(next);
-// }
+
+function catsUpdate(req, res, next) {
+
+  if(req.file) req.body.image = req.file.filename;
+
+  Cat
+    .findById(req.params.id)
+    .populate('owner')
+    .exec()
+    .then((cat) => {
+      if(!cat) return res.notFound();
+      cat = Object.assign(cat, req.body);
+      return cat.save();
+    })
+    .then(cat => res.json(cat))
+    .catch(next);
+}
+
+function catsDelete(req, res, next) {
+  Cat
+    .findById(req.params.id)
+    .populate('owner')
+    .exec()
+    .then((cat) => {
+      if(!cat) return res.notFound();
+      return cat.remove();
+    })
+    .then(() => res.status(204).end())
+    .catch(next);
+}
 
 module.exports = {
   index: catsIndex,
   create: catsCreate,
-  show: catsShow
-  // update: catsUpdate,
-  // delete: catsDelete
+  show: catsShow,
+  update: catsUpdate,
+  delete: catsDelete
 };
