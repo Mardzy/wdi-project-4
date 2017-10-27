@@ -25,13 +25,14 @@ class CatsIndex extends React.Component{
 
     return(
 
-      <Container>
+      <Container id="index">
         <h2>Gallery</h2>
         <Row>
           {this.state.cats && this.state.cats.map(cat =>
             <Col xs={12} sm={6} md={4} key={cat.id}>
-              <Link to={`/cats/${cat.id}`}><img src={cat.gallery[0].image} alt={cat.type}/></Link>
-              <Cat {...cat} index={true}></Cat>
+              <Link to={`/cats/${cat.id}`}>
+                <Cat {...cat} index={true}></Cat>
+              </Link>
             </Col>
           )}
         </Row>

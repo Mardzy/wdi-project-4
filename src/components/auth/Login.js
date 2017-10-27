@@ -11,7 +11,11 @@ class Login extends React.Component {
       password: '',
       id: ''
     },
-    error: null
+    error: {
+      email: '',
+      password: '',
+      invalid: ''
+    }
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -37,6 +41,7 @@ class Login extends React.Component {
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
         error={this.state.error}
+        history={this.props.history}
       />
     );
   }

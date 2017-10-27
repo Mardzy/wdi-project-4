@@ -15,25 +15,25 @@ mongoose.connect(dbURI, { useMongoClient: true })
     return User
       .create([{
         name: 'Paul',
-        age: '1983-12-19',
+        dob: '1983-12-19',
         email: 'mardlingp@gmail.com',
         password: 'password',
         passwordConfirmation: 'password',
-        image: '/images/mardzy.png'
+        image: '/assets/images/mardzy.png'
       }, {
         name: 'Juls',
-        age: '1988-02-03',
+        dob: '1988-02-03',
         email: 'j@j.com',
         password: 'password',
         passwordConfirmation: 'password',
-        image: '/images/juls.png'
+        image: '/assets/images/juls.png'
       }, {
         name: 'Hermione',
-        age: '1990-04-15',
+        dob: '1990-04-15',
         email: 'h@h.com',
         password: 'password',
         passwordConfirmation: 'password',
-        image: '/images/hermione.png'
+        image: '/assets/images/hermione.png'
       }])
       .then(users => {
         console.log(`${users.length} users created`);
@@ -82,32 +82,32 @@ mongoose.connect(dbURI, { useMongoClient: true })
             return Cat
               .create([{
                 name: 'Cece',
-                age: '2017-02-21',
+                dob: '2017-02-21',
                 gender: 'female',
                 type: 'Persian British short hair',
                 gallery: [{
                   description: 'Do you have treats!?',
-                  image: 'assets/images/cece.jpg'
+                  image: '/assets/images/cece.jpg'
                 }],
                 owner: users[0]
               }, {
                 name: 'Toki',
-                age: '2011-12-25',
+                dob: '2011-12-25',
                 gender: 'male',
                 type: 'Persian British short hair',
                 gallery: [{
                   description: 'Sitting pretty.',
-                  image: 'assets/images/toki.jpg'
+                  image: '/assets/images/toki.jpg'
                 }],
                 owner: users[1]
               }, {
                 name: 'Crookshanks',
-                age: '1998-04-15',
+                dob: '1998-04-15',
                 gender: 'male',
                 type: 'Persian',
                 gallery: [{
                   description: 'Look at me',
-                  image: 'assets/images/crookshanks.jpg'
+                  image: '/assets/images/crookshanks.jpg'
                 }],
                 owner: users[2]
               }])

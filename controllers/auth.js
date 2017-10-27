@@ -2,11 +2,11 @@ const jwt = require('jsonwebtoken');
 const { secret } = require('../config/environment');
 const User = require('../models/user');
 
-function register(req, res, next) {
+function register(req, res) {
   User
     .create(req.body)
     .then(() => res.json({ message: 'Registration successful' }))
-    .catch(next);
+    .catch(err => res.status(400).send(err));
 }
 
 function login(req, res, next) {

@@ -1,18 +1,10 @@
 import React from 'react';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
 import Cat from '../common/Cat';
-import Auth from '../../lib/Auth';
-
-
 
 class CatsShow extends React.Component {
   state = {
-    cat: {
-      gallery: {
-        description: '',
-        image: ''}
-    }
+    cat: null
   };
 
   componentDidMount() {
@@ -22,24 +14,15 @@ class CatsShow extends React.Component {
       .catch(err => console.log(err));
   }
 
+  deleteCat = () => {
+
+  }
+
 
   render() {
-    const imageGallery = {...this.state.cat.gallery};
-    const destruct = this.state.cat && imageGallery[0];
-    console.log(destruct);
     return (
       <div className="row show">
-
-        {this.state.cat &&
-          <img className="image" src={imageGallery.image} alt={this.state.cat.name} />}
-        {this.state.cat &&
-          <p>{imageGallery.description}</p>}
-        {this.state.cat &&
-          <Cat {...this.state.cat}></Cat>}
-        {Auth.isAuthenticated() && <Link to={`/cats/${this.state.cat.id}/edit`} className="btn">Edit</Link>}
-        {' '}
-        {Auth.isAuthenticated() &&
-          <button className="btn" onClick={this.deleteCat}>Delete</button>}
+        {this.state.cat && <Cat {...this.state.cat} deleteCat={this.deleteCat}></Cat>}
       </div>
     );
   }

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 // const s3 = require('../lib/s3');
+const moment = require('moment');
+
 
 const commentSchema = new mongoose.Schema({
   text: {type: String, required: true },
@@ -9,13 +11,25 @@ const commentSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: 'Name is required' },
-  age: { type: Date, required: 'Age is required' },
+  dob: { type: Date },
   email: { type: String, required: 'Email is required', unique: 'Email address already taken' },
-  password: { type: String },
+  password: { type: String, required: 'Invalid credentials' },
   // facebookId: { type: String, unique: true, required: false }, // for facebook login
   image: { type: String },
   comments: [commentSchema]
 });
+
+userSchema.virtual('age')
+  .get(function getCurrentAge() {
+    const ageInMonths = moment().diff(this.dob, 'months');
+    const ageInYears = moment().diff(this.dob, 'years');
+    return ( ageInMonths > 12 ) ? ageInYears + ' years' : ageInMonths + ' months';
+  });
+
+userSchema.path('dob')
+  .get(function formatDob(dob) {
+    return moment(dob).format('YYYY-MM-DD');
+  });
 
 userSchema
   .virtual('cats', { // 'cats' is the name of the virtual

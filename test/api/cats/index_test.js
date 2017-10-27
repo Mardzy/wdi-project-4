@@ -1,35 +1,52 @@
-/* global api, describe, it,  expect, beforeEach, helper, afterEach */
-const helper = require('../helper');
-const Food = require('../../../models/cat');
+/* global api, describe, it,  expect, beforeEach, afterEach */
+require('../helper');
+const Cat = require('../../../models/cat');
+const User = require('../../../models/user');
 
-const catData = [{
-  name: 'Toki',
-  age: '2011-12-25T00:00:00.000Z',
-  gender: 'male',
-  type: 'Persian British short hair',
-  gallery: [{
-    description: 'Do you have treats!?',
-    image: '/images/toki.jpg'
-  }]
-}, {
-  name: 'Cece',
-  age: '2017-02-21T00:00:00.000Z',
-  gender: 'female',
-  type: 'Persian British short hair',
-  gallery: [{
-    description: 'Do yu have treats!?',
-    image: '/images/cece.jpg'
-  }]
+const userData = [{
+  name: 'Hermione',
+  age: '1990-04-15',
+  email: 'h@h.com',
+  password: 'password',
+  passwordConfirmation: 'password'
 }];
 
 describe('GET /api/cats', () => {
 
   beforeEach(done => {
-    Food.create(catData, done);
+    User.create(userData)
+      .then(users => {
+
+        const catData = [{
+          name: 'Toki',
+          age: '2011-12-25T00:00:00.000Z',
+          gender: 'male',
+          type: 'Persian British short hair',
+          gallery: [{
+            description: 'Do you have treats!?',
+            image: '/images/toki.jpg'
+          }],
+          owner: users[0]
+        }, {
+          name: 'Cece',
+          age: '2017-02-21T00:00:00.000Z',
+          gender: 'female',
+          type: 'Persian British short hair',
+          gallery: [{
+            description: 'Do yu have treats!?',
+            image: '/images/cece.jpg'
+          }],
+          owner: users[1]
+        }];
+        return Cat.create(catData);
+      })
+      .then(catsData => console.log(catsData.length, ' cats created.'))
+      .then(() => done())
+      .catch(done);
   });
 
   afterEach( done => {
-    Food.collection.remove();
+    Cat.collection.remove();
     done();
   });
 
@@ -57,12 +74,12 @@ describe('GET /api/cats', () => {
       .end((err, res) => {
         const catItem = res.body[0];
         expect(catItem.id).to.be.a('string');
-        expect(catItem.name).to.equal(catData[0].name);
-        expect(catItem.age).to.equal(catData[0].age);
-        expect(catItem.gender).to.equal(catData[0].gender);
-        expect(catItem.type).to.equal(catData[0].type);
-        expect(catItem.gallery.description).to.equal(catData[0].gallery.description);
-        expect(catItem.gallery.image).to.equal(catData[0].gallery.image);
+        expect(catItem.name).to.equal(catDatas[0].name);
+        expect(catItem.age).to.equal(catDatas[0].age);
+        expect(catItem.gender).to.equal(catDatas[0].gender);
+        expect(catItem.type).to.equal(catDatas[0].type);
+        expect(catItem.gallery.description).to.equal(catDatas[0].gallery.description);
+        expect(catItem.gallery.image).to.equal(catDatas[0].gallery.image);
         done();
       });
   });

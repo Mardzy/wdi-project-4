@@ -1,43 +1,37 @@
 import React from 'react';
-import { Container, Row } from 'reactstrap';
-import moment from 'moment';
+import { Container, Row, Col } from 'reactstrap';
+import Auth from '../../lib/Auth';
+import { Link } from 'react-router-dom';
 
-
-const Cat =  ({name, age, gender, type/*, gallery, index, id*/}) => {
-  // console.log('gallery log', gallery[0].image);
-  // let imageHTML = null;
-  // if(index) imageHTML = <Link to={`/cats/${id}`}><img src={gallery[0].image} alt={type}/></Link>;
-  // else imageHTML = <img className="image" src={gallery[0].image} alt={name} />;
-  let yearsOld = null;
-  const calculateAge = moment().diff(age, 'months');
-  if ( calculateAge > 12 ) yearsOld = moment().diff(age, 'years');
-  else yearsOld = moment().diff(age, 'months') + ' months';
+const Cat =  ({name, age, gender, type, gallery, id, owner, deleteCat, index }) => {
+  const authenticated = Auth.isAuthenticated();
+  const currentUser = Auth.getPayload().userId;
+  // console.log(owner.id);
 
   return (
 
-    <Container className="container show-container">
-      {/* <Row id="image">
-        {imageHTML}
-      </Row> */}
-      <Row id="info">
-        <h4><em>{name}</em></h4>
-        <h5>{type}</h5>
-        <h5>Age: {yearsOld}</h5>
-        <p>Gender: {gender}</p>
+    <Container className="container">
+      {gallery.map((item, i) => <Row key={i}>
+        <Col>
+          <img src={item.image} alt={name} />
+          <p className="info">{item.description}</p>
+        </Col>
+      </Row>)}
+      <Row>
+        <Col className="info">
+          <h4><em>{name}</em></h4>
+          <h5>{type}</h5>
+          {!index && <h5>{age} old</h5>}
+          {!index && <p>{gender}</p>}
+        </Col>
       </Row>
+      {authenticated && !index && currentUser === owner.id && <Link to={`/cats/${id}/edit`} className="btn">Edit</Link>}
+      {' '}
+      {authenticated && !index && currentUser === owner.id &&
+        <button className="btn" onClick={deleteCat}>Delete</button>}
     </Container>
 
   );
 };
 
 export default Cat;
-
-// name: 'Cece',
-// age: '2017-02-21',
-// gender: 'female',
-// type: 'Persian British short hair',
-// gallery: [{
-//   description: 'Do you have treats!?',
-//   image: '/images/cece.jpg'
-// }],
-// owner: users[0]

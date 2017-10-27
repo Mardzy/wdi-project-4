@@ -1,20 +1,31 @@
 const mongoose = require('mongoose');
-// const s3 = require('../lib/s3');
+const moment = require('moment');
 
 const gallerySchema = new mongoose.Schema({
   description: { type: String },
-  image: {type: String },
-  owner: { type: mongoose.Schema.ObjectId, ref: 'User' }
+  image: { type: String }
 });
 
 const catSchema = new mongoose.Schema({
   name: { type: String, required: 'Name is required' },
-  age: { type: Date, required: 'Age is required' },
+  dob: { type: Date, required: 'Date of birth is required' },
   gender: { type: String, required: 'Gender is required' },
   type: { type: String },
   gallery: [ gallerySchema ],
   owner: { type: mongoose.Schema.ObjectId, ref: 'User' }
 });
+
+catSchema.virtual('age')
+  .get(function getCurrentAge() {
+    const ageInMonths = moment().diff(this.dob, 'months');
+    const ageInYears = moment().diff(this.dob, 'years');
+    return ( ageInMonths > 12 ) ? ageInYears + ' years' : ageInMonths + ' months';
+  });
+
+catSchema.path('dob')
+  .get(function formatDob(dob) {
+    return moment(dob).format('YYYY-MM-DD');
+  });
 
 // catSchema
 //   .path('image')

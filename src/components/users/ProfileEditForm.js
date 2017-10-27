@@ -1,10 +1,15 @@
 import React from 'react';
 import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import BackButton from '../utility/BackButton';
+
 
 const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
   return (
 
     <Container>
+      <div className="page-banner col-md-12">
+        <BackButton history={history} />
+      </div>
       <Form onSubmit={handleSubmit}>
         <FormGroup className={errors.name ? 'form-group has-error' : 'form-group'}>
           <Label for="name">Name</Label>
@@ -19,19 +24,19 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
             <small>{errors.name}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.dob ? 'form-group has-error' : 'form-group'}>
+        {/* <FormGroup className={errors.dob ? 'form-group has-error' : 'form-group'}>
           <Label for="exampleDate">Date of Birth</Label>
           <Input
             type="date"
-            name="dob"
-            id="dob"
+            name="date"
+            id="exampleDate"
             value={user.dob}
             onChange={handleChange}
           />
           {errors.dob && <Alert color="danger">
             <small>{errors.dob}</small>
           </Alert>}
-        </FormGroup>
+        </FormGroup> */}
         <FormGroup className={errors.email ? 'form-group has-error' : 'form-group'}>
           <Label for="email">Email</Label>
           <Input
