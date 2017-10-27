@@ -6,7 +6,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
 
     <Container>
       <Form onSubmit={handleSubmit}>
-        <FormGroup className={errors.name ? 'form-group has-error' : 'form-group'}>
+        <FormGroup className={errors.name ? 'has-error' : ''}>
           <Label for="name">Name</Label>
           <Input
             type="text"
@@ -19,8 +19,8 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
             <small>{errors.name}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.dob ? 'form-group has-error' : 'form-group'}>
-          <Label for="exampleDate">Date of Birth</Label>
+        <FormGroup className={errors.dob ? 'has-error' : ''}>
+          <Label for="dob">Date of Birth</Label>
           <Input
             type="date"
             name="dob"
@@ -32,7 +32,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
             <small>{errors.dob}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.email ? 'form-group has-error' : 'form-group'}>
+        <FormGroup className={errors.email ? 'has-error' : ''}>
           <Label for="email">Email</Label>
           <Input
             type="email"
@@ -45,7 +45,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
             <small>{errors.email}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.email ? 'form-group has-error' : 'form-group'}>
+        <FormGroup className={errors.password ? 'has-error' : ''}>
           <Label for="email">Password</Label>
           <Input
             type="password"
@@ -58,7 +58,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
             <small>{errors.password}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.passwordConfirmation ? 'form-group has-error' : 'form-group'}>
+        <FormGroup className={errors.passwordConfirmation ? 'has-error' : ''}>
           <Label for="password">Password Confirmation</Label>
           <Input
             type="password"

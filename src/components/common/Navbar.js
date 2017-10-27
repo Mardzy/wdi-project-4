@@ -5,7 +5,7 @@ import Auth from '../../lib/Auth';
 
 const Navbar =  ({history}) => {
   const authenticated = Auth.isAuthenticated();
-
+  // const currentUser = Auth.getPayload().userId;
   function logout(e) {
     e.preventDefault();
     Auth.logout();
@@ -17,11 +17,12 @@ const Navbar =  ({history}) => {
       <div className="navbar-header">
         <Link className="navbar-brand" to="/">CatMad</Link>
       </div>
+      {/* {authenticated && <Link to={`/users/${currentUser}`} >Profile</Link>} */}
       <Link to="/index">All Cats</Link>
       <Link to="/new">Add a Cat</Link>
-      {!authenticated && <Link to="/login" className="standard-button">Login</Link>}
-      {!authenticated && <Link to="/register" className="standard-button">Register</Link>}
-      {authenticated && <a href="#" className="standard-button" onClick={logout}>Logout</a>}
+      {!authenticated && <Link to="/login" >Login</Link>}
+      {!authenticated && <Link to="/register" >Register</Link>}
+      {authenticated && <a href="#" onClick={logout}>Logout</a>}
     </nav>
   );
 };

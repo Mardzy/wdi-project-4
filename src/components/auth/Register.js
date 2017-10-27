@@ -7,11 +7,18 @@ class Register extends React.Component {
   state = {
     user: {
       name: '',
+      dob: '',
       email: '',
       password: '',
       passwordConfirmation: ''
     },
-    errors: {}
+    errors: {
+      name: '',
+      dob: '',
+      email: '',
+      password: '',
+      passwordConfirmation: ''
+    }
   };
 
   handleChange = ({ target: { name, value }}) => {

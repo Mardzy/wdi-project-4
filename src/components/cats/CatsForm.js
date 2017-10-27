@@ -9,7 +9,7 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
         <BackButton history={history} />
       </div>
       <Form onSubmit={handleSubmit}>
-        <FormGroup className={errors.name ? 'form-group has-error' : 'form-group'}>
+        <FormGroup className={errors.name ? 'has-error' : 'form-group'}>
           <Label for="name">Name</Label>
           <Input
             type="text"
@@ -22,12 +22,12 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
             <small>{errors.name}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.dob ? 'form-group has-error' : 'form-group'}>
-          <Label for="exampleDate">Date of Birth</Label>
+        <FormGroup className={errors.dob ? 'has-error' : ''}>
+          <Label for="dob">Date of Birth</Label>
           <Input
             type="date"
-            name="date"
-            id="exampleDate"
+            name="dob"
+            id="dob"
             value={cat.dob}
             onChange={handleChange}
           />
@@ -35,24 +35,24 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
             <small>{errors.dob}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.gender ? 'form-group has-error' : 'form-group'}>
-          <Label for="exampleSelect">Gender</Label>
+        <FormGroup className={errors.gender ? 'has-error' : 'form-group'}>
+          <Label for="gender">Gender</Label>
           <Input
             type="select"
-            name="select"
-            id="exampleSelect"
+            name="gender"
+            id="gender"
             value={cat.gender}
             onChange={handleChange}
           >
-            <option>{cat.gender}</option>
-            <option>female</option>
-            <option>male</option>
+            <option value="" disabled>Please Select Gender</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
           </Input>
           {errors.gender && <Alert color="danger">
             <small>{errors.gender}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.type ? 'form-group has-error' : 'form-group'}>
+        <FormGroup className={errors.type ? 'has-error' : 'form-group'}>
           <Label for="type">Type</Label>
           <Input
             type="text"

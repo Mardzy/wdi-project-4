@@ -29,7 +29,7 @@ class Login extends React.Component {
       .then((res) =>{
         Auth.setToken(res.data.token);
         console.log(res.data.token);
-        this.props.history.push('/gallery');
+        this.props.history.push('/index');
       })
       .catch(() => this.setState({ error: 'Unrecognizable user login credentials'}));
   }
