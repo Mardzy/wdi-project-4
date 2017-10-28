@@ -19,21 +19,24 @@ mongoose.connect(dbURI, { useMongoClient: true })
         email: 'mardlingp@gmail.com',
         password: 'password',
         passwordConfirmation: 'password',
-        image: '/assets/images/mardzy.png'
+        image: '/assets/images/mardzy.png',
+        bio: 'Hi I\'m Paul!'
       }, {
         name: 'Juls',
         dob: '1988-02-03',
         email: 'j@j.com',
         password: 'password',
         passwordConfirmation: 'password',
-        image: '/assets/images/juls.png'
+        image: '/assets/images/juls.png',
+        bio: 'Hi I\'m Juls!'
       }, {
         name: 'Hermione',
         dob: '1990-04-15',
         email: 'h@h.com',
         password: 'password',
         passwordConfirmation: 'password',
-        image: '/assets/images/hermione.png'
+        image: '/assets/images/hermione.png',
+        bio: 'Hi I\'m Hermione!'
       }])
       .then(users => {
         console.log(`${users.length} users created`);
@@ -85,30 +88,30 @@ mongoose.connect(dbURI, { useMongoClient: true })
                 dob: '2017-02-21',
                 gender: 'female',
                 type: 'Persian British short hair',
-                gallery: [{
-                  description: 'Do you have treats!?',
-                  image: '/assets/images/cece.jpg'
-                }],
+                image: '/assets/images/cece.jpg',
+                // gallery: [{
+                //   image: '/assets/images/cece.jpg'
+                // }],
                 owner: users[0]
               }, {
                 name: 'Toki',
                 dob: '2011-12-25',
                 gender: 'male',
                 type: 'Persian British short hair',
-                gallery: [{
-                  description: 'Sitting pretty.',
-                  image: '/assets/images/toki.jpg'
-                }],
+                image: '/assets/images/toki.jpg',
+                // gallery: [{
+                //   image: '/assets/images/toki.jpg'
+                // }],
                 owner: users[1]
               }, {
                 name: 'Crookshanks',
                 dob: '1998-04-15',
                 gender: 'male',
                 type: 'Persian',
-                gallery: [{
-                  description: 'Look at me',
-                  image: '/assets/images/crookshanks.jpg'
-                }],
+                image: '/assets/images/crookshanks.jpg',
+                // gallery: [{
+                //   image: '/assets/images/crookshanks.jpg'
+                // }],
                 owner: users[2]
               }])
               .then(cats => console.log(`${cats.length} cats created.`));

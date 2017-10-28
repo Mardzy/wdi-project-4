@@ -3,9 +3,14 @@ import { Link, withRouter } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 
 
-const Navbar =  ({history}) => {
+const Navbar =  ({history, user}) => {
+  console.log(user);
   const authenticated = Auth.isAuthenticated();
-  // const currentUser = Auth.getPayload().userId;
+  let currentUser = null;
+  if (authenticated) currentUser = Auth.getPayload().userId;
+  let profileLink = null;
+  if(!currentUser && authenticated) return null;
+  else profileLink = <Link to={`/users/${currentUser}`} >Profile</Link>;
   function logout(e) {
     e.preventDefault();
     Auth.logout();
@@ -17,9 +22,9 @@ const Navbar =  ({history}) => {
       <div className="navbar-header">
         <Link className="navbar-brand" to="/">CatMad</Link>
       </div>
-      {/* {authenticated && <Link to={`/users/${currentUser}`} >Profile</Link>} */}
+      {authenticated && currentUser && profileLink}
       <Link to="/index">All Cats</Link>
-      <Link to="/new">Add a Cat</Link>
+      {authenticated && <Link to="/new">Add a Cat</Link>}
       {!authenticated && <Link to="/login" >Login</Link>}
       {!authenticated && <Link to="/register" >Register</Link>}
       {authenticated && <a href="#" onClick={logout}>Logout</a>}

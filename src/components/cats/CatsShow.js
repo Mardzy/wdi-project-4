@@ -1,10 +1,12 @@
 import React from 'react';
 import Axios from 'axios';
 import Cat from '../common/Cat';
+import Auth from '../../lib/Auth';
 
 class CatsShow extends React.Component {
   state = {
-    cat: null
+    cat: {},
+    users: []
   };
 
   componentDidMount() {
@@ -12,17 +14,31 @@ class CatsShow extends React.Component {
     Axios.get(`/api/cats/${this.props.match.params.id}`)
       .then(res => this.setState({ cat: res.data },/*() => console.log(res.data)*/))
       .catch(err => console.log(err));
+    Axios
+      .get('/api/users')
+      .then(res => this.setState({users: res.data}/*, ()=> console.log(res.data)*/))
+      .catch(err=> console.log(err));
   }
 
   deleteCat = () => {
-
+    Axios
+      .delete(`/api/cats/${this.props.match.params.id}`, {
+        headers: { 'Authorization': 'Bearer ' + Auth.getToken() }
+      })
+      .then(() => this.props.history.push('/index'))
+      .catch(err => console.log(err));
   }
 
 
   render() {
+    console.log(this.state.cat.owner);
     return (
       <div className="row show">
-        {this.state.cat && <Cat {...this.state.cat} deleteCat={this.deleteCat}></Cat>}
+        {this.state.cat && <Cat
+          {...this.state.cat}
+          show={true}
+          deleteCat={this.deleteCat}
+        ></Cat>}
       </div>
     );
   }

@@ -4,14 +4,15 @@ const users = require('../controllers/users');
 const messages = require('../controllers/messages');
 const auth = require('../controllers/auth');
 const secureRoute = require('../lib/secureRoute');
+const imageUpload = require('../lib/imageUpload');
 
 router.route('/cats')
   .get(cats.index)
-  .post(secureRoute, cats.create);
-//
+  .post(secureRoute, imageUpload, cats.create);
+
 router.route('/cats/:id')
   .get(cats.show)
-  .put(secureRoute, cats.update)
+  .put(secureRoute, imageUpload, cats.update)
   .delete(secureRoute, cats.delete);
 
 router.route('/users')
@@ -20,7 +21,7 @@ router.route('/users')
 
 router.route('/users/:id')
   .get(users.show)
-  .put(secureRoute, users.update)
+  .put(secureRoute, imageUpload, users.update)
   .delete(secureRoute, users.delete);
 
 router.route('/messages')

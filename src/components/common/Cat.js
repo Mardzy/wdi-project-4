@@ -3,31 +3,36 @@ import { Container, Row, Col } from 'reactstrap';
 import Auth from '../../lib/Auth';
 import { Link } from 'react-router-dom';
 
-const Cat =  ({name, age, gender, type, gallery, id, owner, deleteCat, index }) => {
+const Cat =  ({name, age, gender, type, imageSRC, image, id, owner, deleteCat, show }) => {
   const authenticated = Auth.isAuthenticated();
   const currentUser = Auth.getPayload().userId;
-  // console.log(owner.id);
 
   return (
 
     <Container className="container">
-      {gallery.map((item, i) => <Row key={i}>
+      {/* {gallery.map((item, i) => <Row key={i}>
         <Col>
           <img src={item.image} alt={name} />
           <p className="info">{item.description}</p>
         </Col>
-      </Row>)}
+      </Row>)} */}
+      <Row>
+        <Col>
+          {id && <img src={imageSRC || image} alt={name} />}
+        </Col>
+      </Row>
       <Row>
         <Col className="info">
           <h4><em>{name}</em></h4>
           <h5>{type}</h5>
-          {!index && <h5>{age} old</h5>}
-          {!index && <p>{gender}</p>}
+          {show && <h5>{age} old</h5>}
+          {show && <p>{gender}</p>}
+          {/* {show && <Link to={`/users/${owner.id}`}>{owner.name}</Link>} */}
         </Col>
       </Row>
-      {authenticated && !index && currentUser === owner.id && <Link to={`/cats/${id}/edit`} className="btn">Edit</Link>}
+      {show && <Link to={`/cats/${id}/edit`} className="btn">Edit</Link>}
       {' '}
-      {authenticated && !index && currentUser === owner.id &&
+      {authenticated && show && currentUser &&
         <button className="btn" onClick={deleteCat}>Delete</button>}
     </Container>
 

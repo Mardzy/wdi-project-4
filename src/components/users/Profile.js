@@ -8,7 +8,9 @@ import Auth from '../../lib/Auth';
 
 class Profile extends React.Component {
   state = {
-    user: {}
+    user: {
+      cats: []
+    }
   }
 
   componentWillMount() {
@@ -21,38 +23,45 @@ class Profile extends React.Component {
       });
   }
 
-  deleteuser = () => {
+  deleteUser = () => {
     Axios
       .delete(`/api/users/${this.props.match.params.id}`)
-      .then(() => this.props.history.push('/'));
+      .then(() => this.props.history.push('/home'));
   }
 
   render() {
+    // const User = Auth.getPayload().userId;
     const { user } = this.state;
+    console.log(this.state.user.cats && user);
     return (
       <Container>
-        <h2>{user.name} and Cat</h2>
         <Row>
           <Col md={3}>
-            <img src={user.image} />
+            <img src={user.imageSRC || user.image} />
+            <h2>Name: {user.name}</h2>
             <h4>{user.age} old</h4>
             <BackButton history={this.props.history} />
-            {Auth.isAuthenticated() && <Link to={`/users/${this.state.user.id}/edit`} className="standard-button">
+            {Auth.isAuthenticated() && <Link to={`/users/${user.id}/edit`} className="standard-button">
               <i className="fa fa-pencil" aria-hidden="true"></i>Edit
             </Link>}
             {' '}
-            {Auth.isAuthenticated() && <Button color="danger" onClick={this.deleteuser}>
-              <i className="fa fa-trash" aria-hidden="true"></i>Delete
+            {Auth.isAuthenticated() && <Button
+              color="danger"
+              onClick={this.deleteUser}
+            >Delete
             </Button>}
           </Col>
           <Col md={9}>
             {user.cats && user.cats.map(cat => <Row key={cat.id}>
               <h4>{cat.name}</h4>
-              {cat.gallery.map(item =>
+              <Col md={3}>
+                <img  src={cat.imageSRC || cat.image} />
+              </Col>
+              {/* {cat.gallery.map(item =>
                 <Col md={3} key={item.id}>
                   <img  src={item.image} />
                 </Col>
-              )}
+              )} */}
 
             </Row>
             )}

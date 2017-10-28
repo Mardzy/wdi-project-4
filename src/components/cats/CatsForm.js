@@ -1,6 +1,8 @@
 import React from 'react';
 import BackButton from '../utility/BackButton';
 import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import DragDrop from '../utility/DragDrop';
+
 
 function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
   return (
@@ -9,7 +11,7 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
         <BackButton history={history} />
       </div>
       <Form onSubmit={handleSubmit}>
-        <FormGroup className={errors.name ? 'has-error' : 'form-group'}>
+        <FormGroup className={errors ? 'has-error' : ''}>
           <Label for="name">Name</Label>
           <Input
             type="text"
@@ -19,7 +21,7 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
             onChange={handleChange}
           />
           {errors.name && <Alert color="danger">
-            <small>{errors.name}</small>
+            <small className="text-danger">{errors.name}</small>
           </Alert>}
         </FormGroup>
         <FormGroup className={errors.dob ? 'has-error' : ''}>
@@ -32,10 +34,10 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
             onChange={handleChange}
           />
           {errors.dob && <Alert color="danger">
-            <small>{errors.dob}</small>
+            <small className="text-danger">{errors.dob}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.gender ? 'has-error' : 'form-group'}>
+        <FormGroup className={errors.gender ? 'has-error' : ''}>
           <Label for="gender">Gender</Label>
           <Input
             type="select"
@@ -49,10 +51,10 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
             <option value="male">Male</option>
           </Input>
           {errors.gender && <Alert color="danger">
-            <small>{errors.gender}</small>
+            <small className="text-danger">{errors.gender}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.type ? 'has-error' : 'form-group'}>
+        <FormGroup className={errors.type ? 'has-error' : ''}>
           <Label for="type">Type</Label>
           <Input
             type="text"
@@ -62,9 +64,17 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
             onChange={handleChange}
           />
           {errors.type && <Alert color="danger">
-            <small>{errors.type}</small>
+            <small className="text-danger">{errors.type}</small>
           </Alert>}
         </FormGroup>
+        <FormGroup className={errors.passwordConfirmation ? 'form-group has-error' : 'form-group'}>
+          <Label for="password">Image</Label>
+          <DragDrop
+            onChange={handleChange}
+            value={cat.base64 || cat.imageSRC}
+          />
+        </FormGroup>
+
         <Button>Submit</Button>
       </Form>
     </Container>

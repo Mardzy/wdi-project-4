@@ -9,6 +9,7 @@ import CatsShow from '../cats/CatsShow';
 import CatsNew from '../cats/CatsNew';
 import CatsEdit from '../cats/CatsEdit';
 import Profile from '../users/Profile';
+import ProfileEdit from '../users/ProfileEdit';
 
 const Routes = () => {
   return(
@@ -20,7 +21,9 @@ const Routes = () => {
       <ProtectedRoute path="/new" component={CatsNew} />
       <Route exact path = "/cats/:id" component = {CatsShow} />
       <ProtectedRoute path="/cats/:id/edit" component={CatsEdit} />
-      <Route exact path = "/users/:id" component = {Profile} />
+      <ProtectedRoute exact path = "/users/:id" component = {Profile} />
+      <ProtectedRoute path="/users/:id/edit" component={ProfileEdit} />
+
     </Switch>
   );
 };

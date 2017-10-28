@@ -11,9 +11,16 @@ class CatsNew extends React.Component {
       dob: '',
       gender: '',
       type: '',
+      image: '',
       user: Auth.getPayload().userId
     },
-    errors: {}
+    errors: {
+      name: '',
+      dob: '',
+      gender: '',
+      type: '',
+      image: ''
+    }
   };
 
   // componentWillMount() {
@@ -41,7 +48,7 @@ class CatsNew extends React.Component {
   }
 
   render() {
-    // console.log(Auth.getPayload().userId);
+    console.log(this.state.errors);
     return (
       <CatsForm
         history={this.props.history}
