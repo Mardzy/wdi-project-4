@@ -19,7 +19,7 @@ mongoose.connect(dbURI, { useMongoClient: true })
         email: 'mardlingp@gmail.com',
         password: 'password',
         passwordConfirmation: 'password',
-        image: '/assets/images/mardzy.png',
+        image: '',
         bio: 'Hi I\'m Paul!'
       }, {
         name: 'Juls',
@@ -27,7 +27,7 @@ mongoose.connect(dbURI, { useMongoClient: true })
         email: 'j@j.com',
         password: 'password',
         passwordConfirmation: 'password',
-        image: '/assets/images/juls.png',
+        image: '',
         bio: 'Hi I\'m Juls!'
       }, {
         name: 'Hermione',
@@ -35,22 +35,22 @@ mongoose.connect(dbURI, { useMongoClient: true })
         email: 'h@h.com',
         password: 'password',
         passwordConfirmation: 'password',
-        image: '/assets/images/hermione.png',
+        image: '',
         bio: 'Hi I\'m Hermione!'
       }])
       .then(users => {
         console.log(`${users.length} users created`);
         users[0].comments.push({
           createdBy: users[1],
-          text: 'nice cat'
+          text: 'Yo have a nice cat'
         });
         users[1].comments.push({
           createdBy: users[2],
-          text: 'what beautiful furr you have'
+          text: 'What beautiful cat you have'
         });
         users[2].comments.push({
           createdBy: users[0],
-          text: 'such a squishy face'
+          text: 'He has such a squishy face'
         });
 
         const promises = [
@@ -88,30 +88,27 @@ mongoose.connect(dbURI, { useMongoClient: true })
                 dob: '2017-02-21',
                 gender: 'female',
                 type: 'Persian British short hair',
-                image: '/assets/images/cece.jpg',
-                // gallery: [{
-                //   image: '/assets/images/cece.jpg'
-                // }],
+                gallery: [{
+                  image: '.jpg'
+                }],
                 owner: users[0]
               }, {
                 name: 'Toki',
                 dob: '2011-12-25',
                 gender: 'male',
                 type: 'Persian British short hair',
-                image: '/assets/images/toki.jpg',
-                // gallery: [{
-                //   image: '/assets/images/toki.jpg'
-                // }],
+                gallery: [{
+                  image: ''
+                }],
                 owner: users[1]
               }, {
                 name: 'Crookshanks',
                 dob: '1998-04-15',
                 gender: 'male',
                 type: 'Persian',
-                image: '/assets/images/crookshanks.jpg',
-                // gallery: [{
-                //   image: '/assets/images/crookshanks.jpg'
-                // }],
+                gallery: [{
+                  image: 'kshanks.jpg'
+                }],
                 owner: users[2]
               }])
               .then(cats => console.log(`${cats.length} cats created.`));

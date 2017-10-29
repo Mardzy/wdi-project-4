@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import Auth from '../../lib/Auth';
+// import Auth from '../../lib/Auth';
 import { Link } from 'react-router-dom';
 
-const Cat =  ({name, age, gender, type, imageSRC, image, id, owner, deleteCat, show }) => {
-  const authenticated = Auth.isAuthenticated();
-  const currentUser = Auth.getPayload().userId;
+const Cat =  ({name, age, gender, type, imageSRC, image, id, deleteCat, show }) => {
+  // const authenticated = Auth.isAuthenticated();
+  // const currentUser = Auth.getPayload().userId;
 
   return (
 
@@ -32,7 +32,7 @@ const Cat =  ({name, age, gender, type, imageSRC, image, id, owner, deleteCat, s
       </Row>
       {show && <Link to={`/cats/${id}/edit`} className="btn">Edit</Link>}
       {' '}
-      {authenticated && show && currentUser &&
+      {show &&
         <button className="btn" onClick={deleteCat}>Delete</button>}
     </Container>
 

@@ -31,7 +31,7 @@ class CatsShow extends React.Component {
 
 
   render() {
-    console.log(this.state.cat.owner);
+    // console.log(this.state.cat.owner);
     return (
       <div className="row show">
         {this.state.cat && <Cat

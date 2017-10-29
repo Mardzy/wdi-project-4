@@ -1,7 +1,7 @@
-const Cat = require('../models/cat');
+const Cats = require('../models/cat');
 
 function catsIndex(req, res, next) {
-  Cat
+  Cats.cat
     .find()
     .populate('owner')
     .exec()
@@ -13,7 +13,12 @@ function catsCreate(req, res, next) {
 
   if(req.file) req.body.image = req.file.filename;
 
-  Cat
+  Cats.cat
+    .create(req.body)
+    .then(cat => res.status(201).json(cat))
+    .catch(next);
+    
+  Cats.gallery
     .create(req.body)
     .then(cat => res.status(201).json(cat))
     .catch(next);
@@ -21,7 +26,7 @@ function catsCreate(req, res, next) {
 
 function catsShow(req, res, next) {
   // console.log(req.params.id);
-  Cat
+  Cats.cat
     .findById(req.params.id)
     .populate('owner')
     .exec()
@@ -36,7 +41,7 @@ function catsUpdate(req, res, next) {
 
   if(req.file) req.body.image = req.file.filename;
 
-  Cat
+  Cats.cat
     .findById(req.params.id)
     .populate('owner')
     .exec()
@@ -50,7 +55,7 @@ function catsUpdate(req, res, next) {
 }
 
 function catsDelete(req, res, next) {
-  Cat
+  Cats.cat
     .findById(req.params.id)
     .populate('owner')
     .exec()

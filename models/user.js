@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
   // facebookId: { type: String, unique: true, required: false }, // for facebook login
   image: { type: String },
   bio: { type: String },
+  catOwner: { type: Boolean },
   comments: [commentSchema]
 });
 
