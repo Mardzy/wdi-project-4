@@ -1,7 +1,7 @@
 import React from 'react';
 import BackButton from '../utility/BackButton';
 import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import DragDrop from '../utility/DragDrop';
+// import DragDrop from '../utility/DragDrop';
 
 
 function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
@@ -67,13 +67,13 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
             <small className="text-danger">{errors.type}</small>
           </Alert>}
         </FormGroup>
-        <FormGroup className={errors.passwordConfirmation ? 'form-group has-error' : 'form-group'}>
+        {/* <FormGroup className={errors.passwordConfirmation ? 'form-group has-error' : 'form-group'}>
           <Label for="password">Image</Label>
           <DragDrop
             onChange={handleChange}
             value={cat.base64 || cat.imageSRC}
           />
-        </FormGroup>
+        </FormGroup> */}
 
         <Button>Submit</Button>
       </Form>

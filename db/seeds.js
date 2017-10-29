@@ -88,27 +88,21 @@ mongoose.connect(dbURI, { useMongoClient: true })
                 dob: '2017-02-21',
                 gender: 'female',
                 type: 'Persian British short hair',
-                gallery: [{
-                  image: '.jpg'
-                }],
+                gallery: [],
                 owner: users[0]
               }, {
                 name: 'Toki',
                 dob: '2011-12-25',
                 gender: 'male',
                 type: 'Persian British short hair',
-                gallery: [{
-                  image: ''
-                }],
+                gallery: [],
                 owner: users[1]
               }, {
                 name: 'Crookshanks',
                 dob: '1998-04-15',
                 gender: 'male',
                 type: 'Persian',
-                gallery: [{
-                  image: 'kshanks.jpg'
-                }],
+                gallery: [],
                 owner: users[2]
               }])
               .then(cats => console.log(`${cats.length} cats created.`));

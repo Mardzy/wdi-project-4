@@ -1,11 +1,36 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 const s3 = require('../lib/s3');
-// import {normalize} from 'normalizr';
 
-const gallerySchema = new mongoose.Schema({
-  image: { type: String, default: 'https://spacelist.ca/assets/ui/placeholder-user.b5ae7217a7.jpg' },
-  description: { type: String }
+const imageSchema = new mongoose.Schema({
+  src: { type: String, default: 'https://spacelist.ca/assets/ui/placeholder-user.b5ae7217a7.jpg' },
+  caption: { type: String }
+});
+
+imageSchema
+  .path('src')
+  .set(function getPreviousSrc(src) {
+    this._src = this.src;
+    return src;
+  });
+
+imageSchema
+  .virtual('imageSRC')
+  .get(function getImageSRC() {
+    if(!this.src) return null;
+    return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.src}`;
+  });
+
+imageSchema.pre('save', function checkPreviousImage(next) {
+  if(this.isModified('src') && this._src) {
+    return s3.deleteObject({ Key: this._src }, next);
+  }
+  next();
+});
+
+imageSchema.pre('remove', function removeImage(next) {
+  if(this.src) s3.deleteObject({ Key: this.src }, next);
+  next();
 });
 
 const catSchema = new mongoose.Schema({
@@ -13,11 +38,14 @@ const catSchema = new mongoose.Schema({
   dob: { type: Date, required: 'Date of birth is required' },
   gender: { type: String, required: 'Gender is required' },
   type: { type: String },
-  // image: {type: String},
-  gallery: [ gallerySchema ],
+  gallery: [ imageSchema ],
   owner: { type: mongoose.Schema.ObjectId, ref: 'User' }
 });
 
+catSchema.virtual('heroImage')
+  .get(function getHeroImage() {
+    return this.gallery[0];
+  });
 
 catSchema.virtual('age')
   .get(function getCurrentAge() {
@@ -32,32 +60,5 @@ catSchema.path('dob')
     return moment(dob).format('YYYY-MM-DD');
   });
 
-gallerySchema
-  .path('image')
-  .set(function getPreviousImage(image) {
-    this._image = this.image;
-    return image;
-  });
 
-gallerySchema
-  .virtual('imageSRC')
-  .get(function getImageSRC() {
-    if(!this.image) return null;
-    return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.image}`;
-  });
-
-gallerySchema.pre('save', function checkPreviousImage(next) {
-  if(this.isModified('image') && this._image) {
-    return s3.deleteObject({ Key: this._image }, next);
-  }
-  next();
-});
-
-gallerySchema.pre('remove', function removeImage(next) {
-  if(this.image) s3.deleteObject({ Key: this.image }, next);
-  next();
-});
-const Cat = mongoose.model('Cat', catSchema);
-const Gallery = mongoose.model('Gallery', gallerySchema);
-
-module.exports = {cat: Cat, gallery: Gallery};
+module.exports = mongoose.model('Cat', catSchema);

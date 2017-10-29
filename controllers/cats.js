@@ -1,7 +1,7 @@
-const Cats = require('../models/cat');
+const Cat = require('../models/cat');
 
 function catsIndex(req, res, next) {
-  Cats.cat
+  Cat
     .find()
     .populate('owner')
     .exec()
@@ -13,12 +13,7 @@ function catsCreate(req, res, next) {
 
   if(req.file) req.body.image = req.file.filename;
 
-  Cats.cat
-    .create(req.body)
-    .then(cat => res.status(201).json(cat))
-    .catch(next);
-    
-  Cats.gallery
+  Cat
     .create(req.body)
     .then(cat => res.status(201).json(cat))
     .catch(next);
@@ -26,7 +21,7 @@ function catsCreate(req, res, next) {
 
 function catsShow(req, res, next) {
   // console.log(req.params.id);
-  Cats.cat
+  Cat
     .findById(req.params.id)
     .populate('owner')
     .exec()
@@ -41,7 +36,7 @@ function catsUpdate(req, res, next) {
 
   if(req.file) req.body.image = req.file.filename;
 
-  Cats.cat
+  Cat
     .findById(req.params.id)
     .populate('owner')
     .exec()
@@ -55,7 +50,7 @@ function catsUpdate(req, res, next) {
 }
 
 function catsDelete(req, res, next) {
-  Cats.cat
+  Cat
     .findById(req.params.id)
     .populate('owner')
     .exec()
@@ -67,10 +62,62 @@ function catsDelete(req, res, next) {
     .catch(next);
 }
 
+function catsImagesShow(req, res, next) {
+  Cat
+    .findById(req.params.id)
+    .exec()
+    .then((cat) => {
+      if(!cat) return res.notFound();
+
+      const image = cat.gallery.id(req.params.imageId);
+      res.json(image);
+    })
+    .catch(next);
+}
+
+function catsImagesCreate(req, res, next) {
+  if(req.file) req.body.image = req.file.filename;
+  req.body.owner = req.currentUser;
+
+  Cat
+    .findById(req.params.id)
+    .populate('owner')
+    .exec()
+    .then((cat) => {
+      if(!cat) return res.notFound();
+
+      const galleryItem = cat.gallery.create(req.body);
+      cat.gallery.push(galleryItem);
+
+      return cat.save()
+        .then(() => res.json(galleryItem));
+    })
+    .catch(next);
+}
+
+function catsImagesDelete(req, res, next) {
+  Cat
+    .findById(req.params.id)
+    .exec()
+    .then((cat) => {
+      if(!cat) return res.notFound();
+
+      const image = cat.gallery.id(req.params.imageId);
+      image.remove();
+
+      return cat.save();
+    })
+    .then(() => res.status(204).end())
+    .catch(next);
+}
+
 module.exports = {
   index: catsIndex,
   create: catsCreate,
   show: catsShow,
   update: catsUpdate,
-  delete: catsDelete
+  delete: catsDelete,
+  imagesShow: catsImagesShow,
+  imagesCreate: catsImagesCreate,
+  imagesDelete: catsImagesDelete
 };

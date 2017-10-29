@@ -10,6 +10,9 @@ import CatsNew from '../cats/CatsNew';
 import CatsEdit from '../cats/CatsEdit';
 import Profile from '../users/Profile';
 import ProfileEdit from '../users/ProfileEdit';
+import MessagesIndex from '../messages/MessagesIndex';
+import MessagesShow from '../messages/MessagesShow';
+import CatsImagesNew from '../cats/CatsImagesNew';
 
 const Routes = () => {
   return(
@@ -20,10 +23,13 @@ const Routes = () => {
       <Route exact path="/index" component={CatsIndex} />
       <ProtectedRoute path="/new" component={CatsNew} />
       <Route exact path = "/cats/:id" component = {CatsShow} />
-      <ProtectedRoute path="/cats/:id/edit" component={CatsEdit} />
+      <Route exact path = "/cats/:id" component = {CatsShow} />
+      <ProtectedRoute path="/cats/:id/images/edit" component={CatsEdit} />
+      <ProtectedRoute path="/cats/:id/images/new" component={CatsImagesNew} />
       <ProtectedRoute exact path = "/users/:id" component = {Profile} />
       <ProtectedRoute path="/users/:id/edit" component={ProfileEdit} />
-
+      <ProtectedRoute exact path = "/messages" component = {MessagesIndex} />
+      <ProtectedRoute path = "/messages/:id" component = {MessagesShow} />
     </Switch>
   );
 };

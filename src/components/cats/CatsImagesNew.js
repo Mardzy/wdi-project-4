@@ -1,37 +1,39 @@
 import React from 'react';
 import Axios from 'axios';
 import Auth from '../../lib/Auth';
-import CatsForm from './CatsForm';
+import CatsImagesForm from './CatsImagesForm';
 
-class CatsEdit extends React.Component {
+class CatsImagesNew extends React.Component {
   state = {
-    cat: {
-      name: '',
-      dob: '',
-      gender: '',
-      type: '',
-      owner: Auth.getPayload().userId
+    gallery: {
+      src: '',
+      caption: ''
     },
-    errors: {}
+    errors: {
+      src: '',
+      caption: ''
+    }
   };
 
   componentDidMount() {
+    console.log('new image didMount', this.props);
     Axios
-      .get(`/api/cats/${this.props.match.params.id}`)
-      .then(res => this.setState({ cat: res.data }))
+      .post(`/api/cats/${this.props.match.params.id}/images/`)
+      .then(res => this.setState({ gallery: res.data }))
       .catch(err => console.log(err));
   }
 
   handleChange = ({ target: { name, value } }) => {
-    const cat = Object.assign({}, this.state.cat, { [name]: value });
-    this.setState({ cat });
+    const gallery = Object.assign({}, this.state.gallery, { [name]: value });
+    this.setState({ gallery });
   }
 
   handleSubmit = (e) => {
+
     e.preventDefault();
 
     Axios
-      .put(`/api/cats/${this.props.match.params.id}`, this.state.cat, {
+      .put(`/api/cats/${this.props.match.params.id}/images/`, this.state.gallery, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
       .then(res => this.props.history.push(`/cats/${res.data.id}`))
@@ -39,16 +41,18 @@ class CatsEdit extends React.Component {
   }
 
   render() {
+    console.log('images new', this.state);
     return (
-      <CatsForm
+      <CatsImagesForm
         history={this.props.history}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
-        cat={this.state.cat}
+        gallery={this.state.src}
         errors={this.state.errors}
       />
     );
   }
+
 }
 
-export default CatsEdit;
+export default CatsImagesNew;

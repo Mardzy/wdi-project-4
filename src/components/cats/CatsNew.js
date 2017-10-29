@@ -11,15 +11,13 @@ class CatsNew extends React.Component {
       dob: '',
       gender: '',
       type: '',
-      image: '',
       user: Auth.getPayload().userId
     },
     errors: {
       name: '',
       dob: '',
       gender: '',
-      type: '',
-      image: ''
+      type: ''
     }
   };
 
@@ -48,7 +46,7 @@ class CatsNew extends React.Component {
   }
 
   render() {
-    console.log(this.state.errors);
+    // console.log(this.state.errors);
     return (
       <CatsForm
         history={this.props.history}

@@ -12,8 +12,16 @@ router.route('/cats')
 
 router.route('/cats/:id')
   .get(cats.show)
-  .put(secureRoute, imageUpload, cats.update)
+  .put(secureRoute, cats.update)
   .delete(secureRoute, cats.delete);
+
+router.route('/cats/:id/images')
+  .post(secureRoute, imageUpload, cats.imagesCreate)
+  .delete(secureRoute, cats.imagesDelete);
+
+router.route('/cats/:id/images/:imageId')
+  .get(secureRoute, cats.imagesShow)
+  .put(secureRoute, imageUpload, cats.imagesDelete);
 
 router.route('/users')
   .get(users.index)
