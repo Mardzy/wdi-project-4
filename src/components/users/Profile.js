@@ -29,6 +29,16 @@ class Profile extends React.Component {
       .then(() => this.props.history.push('/home'));
   }
 
+  createConversation = () => {
+    Axios
+      .post('/api/conversations', {to: this.state.user.id}, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      .then(res => this.props.history.push(`/conversations/${res.data.id}`))
+      .catch(err => console.log(err));
+
+  }
+
   render() {
     // const User = Auth.getPayload().userId;
     const { user } = this.state;
@@ -46,7 +56,7 @@ class Profile extends React.Component {
             {/* <h6>{user.age} old</h6> */}
 
             {Auth.isAuthenticated() && <div>
-              <Button className="new-button" outline><Link to={'/messages/new'}><i className="fa fa-envelope" aria-hidden="true"></i> Message {user.name}</Link></Button>
+              <Button className="new-button" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {user.name}</Button>
               <Button className="edit-button" outline><Link to={`/users/${user.id}/edit`}>Edit Profile</Link></Button>
               <Button outline color="danger" onClick={this.deleteUser}>Delete Profile       </Button>
             </div>}

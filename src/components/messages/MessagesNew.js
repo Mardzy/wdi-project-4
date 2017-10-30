@@ -9,8 +9,8 @@ class Message extends React.Component {
   state = {
     message: {
       text: '',
-      from: Auth.getPayload().userId,
-      to: this.state.props.match.id
+      from: '',
+      to: ''
     },
     errors: {
       text: '',
@@ -18,6 +18,10 @@ class Message extends React.Component {
       to: ''
     }
   };
+
+  componentDidMount() {
+    console.log('component mounted');
+  }
 
   handleChange = ({ target: { name, value } }) => {
     const message = Object.assign({}, this.state.message, { [name]: value });

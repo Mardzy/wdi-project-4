@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const cats = require('../controllers/cats');
 const users = require('../controllers/users');
-const messages = require('../controllers/messages');
+const conversations = require('../controllers/conversations');
 const auth = require('../controllers/auth');
 const secureRoute = require('../lib/secureRoute');
 const imageUpload = require('../lib/imageUpload');
@@ -32,13 +32,16 @@ router.route('/users/:id')
   .put(imageUpload, users.update)
   .delete(secureRoute, users.delete);
 
-router.route('/messages')
-  .get(secureRoute, messages.index)
-  .post(secureRoute, messages.create);
+router.route('/conversations')
+  .get(secureRoute, conversations.index)
+  .post(secureRoute, conversations.create);
 
+router.route('/conversations/:id')
+  .get(conversations.show);
 
-router.route('/messages/:id')
-  .get(messages.show);
+router.route('/conversations/:id/messages')
+  .post(secureRoute, conversations.messagesCreate);
+
 
 router.route('/register')
   .post(auth.register);

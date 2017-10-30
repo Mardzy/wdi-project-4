@@ -6,7 +6,7 @@ const { dbURI } = require('../config/environment');
 
 const User = require('../models/user');
 const Cat = require('../models/cat');
-const Message = require('../models/message');
+const Conversation = require('../models/message');
 
 mongoose.connect(dbURI, { useMongoClient: true })
   .then(db => {
@@ -62,7 +62,7 @@ mongoose.connect(dbURI, { useMongoClient: true })
         return Promise.all(promises);
       })
       .then((users) => {
-        return Message
+        return Conversation
           .create([{
             text: 'Hello',
             from: users[0],
