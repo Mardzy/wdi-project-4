@@ -3,33 +3,33 @@ const moment = require('moment');
 const s3 = require('../lib/s3');
 
 const imageSchema = new mongoose.Schema({
-  src: { type: String, default: 'https://spacelist.ca/assets/ui/placeholder-user.b5ae7217a7.jpg' },
+  image: { type: String },
   caption: { type: String }
 });
 
 imageSchema
-  .path('src')
-  .set(function getPreviousSrc(src) {
-    this._src = this.src;
-    return src;
+  .path('image')
+  .set(function getPreviousSrc(image) {
+    this._image = this.image;
+    return image;
   });
 
 imageSchema
   .virtual('imageSRC')
   .get(function getImageSRC() {
-    if(!this.src) return null;
-    return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.src}`;
+    if(!this.image) return null;
+    return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.image}`;
   });
 
 imageSchema.pre('save', function checkPreviousImage(next) {
-  if(this.isModified('src') && this._src) {
-    return s3.deleteObject({ Key: this._src }, next);
+  if(this.isModified('image') && this._image) {
+    return s3.deleteObject({ Key: this._image }, next);
   }
   next();
 });
 
 imageSchema.pre('remove', function removeImage(next) {
-  if(this.src) s3.deleteObject({ Key: this.src }, next);
+  if(this.image) s3.deleteObject({ Key: this.image }, next);
   next();
 });
 

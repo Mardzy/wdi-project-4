@@ -3,7 +3,7 @@ import DragDrop from '../utility/DragDrop';
 import { Button, Form, FormGroup, Label, Container, Input, Alert } from 'reactstrap';
 
 const CatsImagesForm = ({handleSubmit, handleChange, errors, gallery}) => {
-  // console.log(this.state);
+  // console.log('catsImageForm', this.state);
 
   return (
     <Container>
@@ -15,16 +15,16 @@ const CatsImagesForm = ({handleSubmit, handleChange, errors, gallery}) => {
           <Label for="image">Add Image</Label>
           <DragDrop
             onChange={handleChange}
-            value={ gallery.base64 || gallery.srcSRC}
+            value={gallery.base64 || gallery.imageSRC}
           />
         </FormGroup>
-        <FormGroup className={errors.caption ? 'has-error' : ''}>
-          <Label for="email">Caption</Label>
+        <FormGroup className={errors ? 'has-error' : ''}>
+          <Label for="caption">Caption</Label>
           <Input
             type="text"
             name="caption"
             id="caption"
-            placeholder="Email"
+            placeholder="Image caption"
             value={gallery.caption}
             onChange={handleChange}
             required

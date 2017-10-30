@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-import Cat from '../common/Cat';
+import Cat from './Cat';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col } from 'reactstrap';
 

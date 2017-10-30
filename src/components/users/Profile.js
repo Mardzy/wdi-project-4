@@ -37,7 +37,7 @@ class Profile extends React.Component {
       <Container>
         <Row>
           <Col md={3}>
-            <img src={user.imageSRC || user.image} />
+            <img src={user.imageSRC || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWstsZn-GdjM44v3LixeexalwxI1nxFQ3Bs8cIkVU5KPE-6zFVfg'} />
             <h2>Name: {user.name}</h2>
             <h4>{user.age} old</h4>
             <BackButton history={this.props.history} />
@@ -55,7 +55,7 @@ class Profile extends React.Component {
             {user.cats && user.cats.map(cat => <Row key={cat.id}>
               <h4>{cat.name}</h4>
               <Col md={3}>
-                <img  src={cat.imageSRC || cat.image} />
+                <Link to={`/cats/${cat.id}`}><img  src={cat.heroImage.imageSRC} /></Link>
               </Col>
               {/* {cat.gallery.map(item =>
                 <Col md={3} key={item.id}>

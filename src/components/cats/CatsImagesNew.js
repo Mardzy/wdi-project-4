@@ -6,22 +6,22 @@ import CatsImagesForm from './CatsImagesForm';
 class CatsImagesNew extends React.Component {
   state = {
     gallery: {
-      src: '',
+      imageSRC: '',
       caption: ''
     },
     errors: {
-      src: '',
+      imageSRC: '',
       caption: ''
     }
   };
 
-  componentDidMount() {
-    console.log('new image didMount', this.props);
-    Axios
-      .post(`/api/cats/${this.props.match.params.id}/images/`)
-      .then(res => this.setState({ gallery: res.data }))
-      .catch(err => console.log(err));
-  }
+  // componentDidMount() {
+  //   console.log('new image didMount', this.props);
+  //   Axios
+  //     .post(`/api/cats/${this.props.match.params.id}/images/`)
+  //     .then(res => this.setState({ gallery: res.data }))
+  //     .catch(err => console.log(err));
+  // }
 
   handleChange = ({ target: { name, value } }) => {
     const gallery = Object.assign({}, this.state.gallery, { [name]: value });
@@ -29,25 +29,27 @@ class CatsImagesNew extends React.Component {
   }
 
   handleSubmit = (e) => {
-
     e.preventDefault();
 
     Axios
-      .put(`/api/cats/${this.props.match.params.id}/images/`, this.state.gallery, {
+      .post(`/api/cats/${this.props.match.params.id}/images/`, this.state.gallery, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      .then(res => this.props.history.push(`/cats/${res.data.id}`))
+      .then(res => {
+        console.log(res.data);
+        this.props.history.push(`/cats/${this.props.match.params.id}`);
+      })
       .catch(err => this.setState({ errors: err.response.data.errors }));
   }
 
   render() {
-    console.log('images new', this.state);
+    console.log('images new', this.props);
     return (
       <CatsImagesForm
         history={this.props.history}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
-        gallery={this.state.src}
+        gallery={this.state.gallery}
         errors={this.state.errors}
       />
     );

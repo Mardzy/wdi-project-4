@@ -1,15 +1,13 @@
 import React from 'react';
 import Axios from 'axios';
-import Cat from '../common/Cat';
+import Cat from './Cat';
 import Auth from '../../lib/Auth';
 import {Link} from 'react-router-dom';
 
 
 class CatsShow extends React.Component {
   state = {
-    cat: {
-      gallery: []
-    },
+    cat: {},
     users: []
   };
 

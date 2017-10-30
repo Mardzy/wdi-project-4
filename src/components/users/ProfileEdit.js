@@ -10,13 +10,13 @@ class ProfileEdit extends React.Component {
       dob: '',
       email: '',
       imageSRC: '',
-      id: Auth.getPayload().userId
+      id: ''
     },
     errors: {
       name: '',
       dob: '',
       email: '',
-      image: '',
+      imageSRC: '',
       id: ''
     }
   };

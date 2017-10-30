@@ -5,13 +5,20 @@ import CatsImagesForm from './CatsImagesForm';
 
 class CatsImagesEdit extends React.Component {
   state = {
-    src: {}
+    gallery: {
+      image: '',
+      caption: ''
+    },
+    errors: {
+      image: '',
+      caption: ''
+    }
   };
 
   componentDidMount() {
     console.log('gallery didMount', this.props);
     Axios
-      .get(`/api/cats/${this.props.match.params.id}/images/${this.props.match.params.srcId}`)
+      .get(`/api/cats/${this.props.match.params.id}/images/${this.props.match.params.id}`)
       .then(res => this.setState({ src: res.data }))
       .catch(err => console.log(err));
   }
@@ -26,7 +33,7 @@ class CatsImagesEdit extends React.Component {
     e.preventDefault();
 
     Axios
-      .put(`/api/cats/${this.props.match.params.id}/images/${this.props.match.params.srcId}`, this.state.src, {
+      .put(`/api/cats/${this.props.match.params.id}/images/${this.props.match.params.id}`, this.state.src, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
       .then(res => this.props.history.push(`/cats/${res.data.id}`))
@@ -39,7 +46,7 @@ class CatsImagesEdit extends React.Component {
         history={this.props.history}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
-        src={this.state.src}
+        gallery={this.state.cat.gallery}
         errors={this.state.errors}
       />
     );

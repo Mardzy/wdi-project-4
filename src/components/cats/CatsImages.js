@@ -3,10 +3,10 @@ import { Container/*, Row, Col*/ } from 'reactstrap';
 // import Auth from '../../lib/Auth';
 // import { Link } from 'react-router-dom';
 
-const Gallery =  ({ deleteImage, src }) => {
+const Gallery =  ({ deleteImage}) => {
   // const authenticated = Auth.isAuthenticated();
   // const currentUser = Auth.getPayload().userId;
-  console.log('gallery log', src);
+  // console.log('gallery log', src);
   return (
 
     <Container className="container">

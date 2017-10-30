@@ -1,7 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
 import Auth from '../../lib/Auth';
-
 import CatsForm from './CatsForm';
 
 class CatsNew extends React.Component {
@@ -11,7 +10,7 @@ class CatsNew extends React.Component {
       dob: '',
       gender: '',
       type: '',
-      user: Auth.getPayload().userId
+      owner: Auth.getPayload().userId
     },
     errors: {
       name: '',

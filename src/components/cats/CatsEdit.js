@@ -10,9 +10,17 @@ class CatsEdit extends React.Component {
       dob: '',
       gender: '',
       type: '',
-      owner: Auth.getPayload().userId
+      gallery: [],
+      owner: ''
     },
-    errors: {}
+    errors: {
+      name: '',
+      dob: '',
+      gender: '',
+      type: '',
+      gallery: [],
+      owner: ''
+    }
   };
 
   componentDidMount() {

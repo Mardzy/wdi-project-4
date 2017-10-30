@@ -19,7 +19,7 @@ router.route('/cats/:id/images')
   .post(secureRoute, imageUpload, cats.imagesCreate)
   .delete(secureRoute, cats.imagesDelete);
 
-router.route('/cats/:id/images/:imageId')
+router.route('/cats/:id/images/:srcId')
   .get(secureRoute, cats.imagesShow)
   .put(secureRoute, imageUpload, cats.imagesDelete);
 
@@ -29,7 +29,7 @@ router.route('/users')
 
 router.route('/users/:id')
   .get(users.show)
-  .put(secureRoute, imageUpload, users.update)
+  .put(imageUpload, users.update)
   .delete(secureRoute, users.delete);
 
 router.route('/messages')
