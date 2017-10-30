@@ -67,14 +67,6 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
             <small className="text-danger">{errors.type}</small>
           </Alert>}
         </FormGroup>
-        {/* <FormGroup className={errors.passwordConfirmation ? 'form-group has-error' : 'form-group'}>
-          <Label for="password">Image</Label>
-          <DragDrop
-            onChange={handleChange}
-            value={cat.base64 || cat.imageSRC}
-          />
-        </FormGroup> */}
-
         <Button>Submit</Button>
       </Form>
     </Container>

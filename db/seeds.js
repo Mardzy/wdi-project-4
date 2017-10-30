@@ -6,7 +6,7 @@ const { dbURI } = require('../config/environment');
 
 const User = require('../models/user');
 const Cat = require('../models/cat');
-const Conversation = require('../models/message');
+const Conversation = require('../models/conversation');
 
 mongoose.connect(dbURI, { useMongoClient: true })
   .then(db => {
@@ -64,21 +64,33 @@ mongoose.connect(dbURI, { useMongoClient: true })
       .then((users) => {
         return Conversation
           .create([{
-            text: 'Hello',
             from: users[0],
-            to: users[1]
+            to: users[1],
+            messages: {
+              text: 'Hello there Juls',
+              from: users[0]
+            }
           }, {
-            text: 'Hi, how are you',
             from: users[1],
-            to: users[0]
-          } , {
-            text: 'Hiya',
-            from: users[1],
-            to: users[2]
+            to: users[0],
+            messages: {
+              text: 'Well Hello there Paul, how are you?',
+              from: users[1]
+            }
           }, {
-            text: 'Hello, I am well, and you?',
             from: users[2],
-            to: users[1]
+            to: users[0],
+            messages: {
+              text: 'Hello there Paul',
+              from: users[2]
+            }
+          }, {
+            from: users[0],
+            to: users[2],
+            messages: {
+              text: 'Hi Hermione',
+              from: users[0]
+            }
           }])
           .then(messages => {
             console.log(`${messages.length} messages created.`);

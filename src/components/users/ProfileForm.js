@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-// import BackButton from '../utility/BackButton';
+import BackButton from '../utility/BackButton';
 import DragDrop from '../utility/DragDrop';
 
 
@@ -10,9 +10,9 @@ const ProfileForm = ({ handleChange, handleSubmit, user, errors }) => {
   return (
 
     <Container>
-      {/* <div className="page-banner col-md-12">
+      <div className="col-md-12">
         <BackButton history={history} />
-      </div> */}
+      </div>
       <Form onSubmit={handleSubmit}>
         <FormGroup className={errors.name ? 'has-error' : ''}>
           <Label for="name">Name</Label>

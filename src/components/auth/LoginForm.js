@@ -38,7 +38,7 @@ const LoginForm = ({ handleChange, handleSubmit, credentials, error }) => {
         {error.invalid && <Alert color="danger">
           <small>{error.invalid}</small>
         </Alert>}
-        <Button>Submit</Button>
+        <Button outline>Submit</Button>
       </Form>
     </Container>
 

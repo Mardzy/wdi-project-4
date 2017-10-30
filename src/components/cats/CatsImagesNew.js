@@ -43,7 +43,7 @@ class CatsImagesNew extends React.Component {
   }
 
   render() {
-    console.log('images new', this.props);
+    // console.log('images new', this.props);
     return (
       <CatsImagesForm
         history={this.props.history}

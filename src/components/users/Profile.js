@@ -41,28 +41,29 @@ class Profile extends React.Component {
 
   render() {
     // const User = Auth.getPayload().userId;
-    const { user } = this.state;
-    console.log(this.state.user.cats && user);
+    const { name, imageSRC, id, cats, bio } = this.state.user;
+    // console.log(this.state.user.cats && user);
     return (
       <Container>
         <BackButton history={this.props.history} />
-        <h4>{user.name}`s Profile</h4>
+        <h4>{name}`s Profile</h4>
         <Row>
           <Col md={3}>
             <div>
-              <img src={user.imageSRC || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWstsZn-GdjM44v3LixeexalwxI1nxFQ3Bs8cIkVU5KPE-6zFVfg'} />
+              <img src={imageSRC || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWstsZn-GdjM44v3LixeexalwxI1nxFQ3Bs8cIkVU5KPE-6zFVfg'} />
+              <p>{bio}</p>
             </div>
 
             {/* <h6>{user.age} old</h6> */}
 
             {Auth.isAuthenticated() && <div>
-              <Button className="new-button" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {user.name}</Button>
-              <Button className="edit-button" outline><Link to={`/users/${user.id}/edit`}>Edit Profile</Link></Button>
+              <Button className="new-button" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {name}</Button>
+              <Link className="btn btn-outline edit" to={`/users/${id}/edit`}>Edit Profile</Link>
               <Button outline color="danger" onClick={this.deleteUser}>Delete Profile       </Button>
             </div>}
           </Col>
           <Col md={9}>
-            {user.cats && user.cats.map(cat => <Row key={cat.id}>
+            {cats && cats.map(cat => <Row key={cat.id}>
               <h4>{cat.name}</h4>
               <Col md={3}>
                 <Link to={`/cats/${cat.id}`}><img  src={cat.heroImage.imageSRC} /></Link>

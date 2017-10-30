@@ -2,8 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 
-const Navbar =  ({history, user}) => {
-  console.log(user);
+const Navbar =  ({history}) => {
   const authenticated = Auth.isAuthenticated();
   let currentUser = null;
   if (authenticated) currentUser = Auth.getPayload().userId;
@@ -23,7 +22,7 @@ const Navbar =  ({history, user}) => {
         <Link className="navbar-brand" to="/">CatMad</Link>
       </div>
       {authenticated && currentUser && profileLink}
-      <Link to="/messages">Inbox</Link>
+      <Link to="/conversations">Inbox</Link>
       <Link to="/index">All Cats</Link>
       {authenticated && <Link to="/new">Add a Cat</Link>}
       {!authenticated && <Link to="/login" >Login</Link>}

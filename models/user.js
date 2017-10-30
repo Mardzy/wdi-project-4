@@ -40,19 +40,19 @@ userSchema
     foreignField: 'owner' // to match up with the owner field from the Cat schema
   });
 
-// userSchema
-//   .virtual('messages', {
-//     ref: 'Message',
-//     localField: '_id',
-//     foreignField: 'to'
-//   });
-//
-// userSchema
-//   .virtual('sentMessages', {
-//     ref: 'Message',
-//     localField: '_id',
-//     foreignField: 'from'
-//   });
+userSchema
+  .virtual('messages', {
+    ref: 'Conversation',
+    localField: '_id',
+    foreignField: 'to'
+  });
+
+userSchema
+  .virtual('sentMessages', {
+    ref: 'Conversation',
+    localField: '_id',
+    foreignField: 'from'
+  });
 
 userSchema
   .virtual('passwordConfirmation')
