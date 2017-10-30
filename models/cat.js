@@ -51,7 +51,7 @@ catSchema.virtual('age')
   .get(function getCurrentAge() {
     const ageInMonths = moment().diff(this.dob, 'months');
     const ageInYears = moment().diff(this.dob, 'years');
-    return ( ageInMonths > 12 ) ? ageInYears + ' years' : ageInMonths + ' months';
+    return ( ageInMonths > 12 ) ? ageInYears + ' year' : ageInMonths + ' month';
   });
 
 

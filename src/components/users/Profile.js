@@ -35,21 +35,21 @@ class Profile extends React.Component {
     console.log(this.state.user.cats && user);
     return (
       <Container>
+        <BackButton history={this.props.history} />
+        <h4>{user.name}`s Profile</h4>
         <Row>
           <Col md={3}>
-            <img src={user.imageSRC || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWstsZn-GdjM44v3LixeexalwxI1nxFQ3Bs8cIkVU5KPE-6zFVfg'} />
-            <h2>Name: {user.name}</h2>
-            <h4>{user.age} old</h4>
-            <BackButton history={this.props.history} />
-            {Auth.isAuthenticated() && <Link to={`/users/${user.id}/edit`} className="standard-button">
-              <i className="fa fa-pencil" aria-hidden="true"></i>Edit
-            </Link>}
-            {' '}
-            {Auth.isAuthenticated() && <Button
-              color="danger"
-              onClick={this.deleteUser}
-            >Delete
-            </Button>}
+            <div>
+              <img src={user.imageSRC || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWstsZn-GdjM44v3LixeexalwxI1nxFQ3Bs8cIkVU5KPE-6zFVfg'} />
+            </div>
+
+            {/* <h6>{user.age} old</h6> */}
+
+            {Auth.isAuthenticated() && <div>
+              <Button className="new-button" outline><Link to={'/messages/new'}><i className="fa fa-envelope" aria-hidden="true"></i> Message {user.name}</Link></Button>
+              <Button className="edit-button" outline><Link to={`/users/${user.id}/edit`}>Edit Profile</Link></Button>
+              <Button outline color="danger" onClick={this.deleteUser}>Delete Profile       </Button>
+            </div>}
           </Col>
           <Col md={9}>
             {user.cats && user.cats.map(cat => <Row key={cat.id}>

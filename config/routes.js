@@ -33,8 +33,8 @@ router.route('/users/:id')
   .delete(secureRoute, users.delete);
 
 router.route('/messages')
-  .get(messages.index)
-  .post(messages.create);
+  .get(secureRoute, messages.index)
+  .post(secureRoute, messages.create);
 
 
 router.route('/messages/:id')

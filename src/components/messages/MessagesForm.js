@@ -1,19 +1,20 @@
 import React from 'react';
 import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-const MessageForm = ({ handleChange, handleSubmit, message, error }) => {
+const MessageForm = ({ handleChange, handleSubmit, message, errors }) => {
+  console.log(message);
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-        <FormGroup className={error.text ? 'has-error' : ''}>
-          <Label for="text">Email</Label>
+        <FormGroup className={errors ? 'has-error' : ''}>
+          <Label for="text">Message</Label>
           <Input type="textarea" name="text" id="text" value={message.text} onChange={handleChange}/>
-          {error.text && <Alert color="danger">
-            <small>{error.text}</small>
+          {errors && <Alert color="danger">
+            <small>{errors.text}</small>
           </Alert>}
         </FormGroup>
-        {error.invalid && <Alert color="danger">
-          <small>{error.invalid}</small>
+        {errors.invalid && <Alert color="danger">
+          <small>{errors.invalid}</small>
         </Alert>}
         <Button>Submit</Button>
       </Form>

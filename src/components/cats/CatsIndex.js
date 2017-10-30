@@ -25,9 +25,9 @@ class CatsIndex extends React.Component{
 
     return(
 
-      <Container id="index">
-        <h2>Gallery</h2>
-        <Row>
+      <Container>
+        <h2>Cats to Visit</h2>
+        <Row id="cat-index">
           {this.state.cats && this.state.cats.map(cat =>
             <Col xs={12} sm={6} md={4} key={cat.id}>
               <Link to={`/cats/${cat.id}`}>

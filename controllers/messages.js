@@ -2,7 +2,7 @@ const Message = require('../models/message');
 
 function messagesIndex(req, res, next) {
   Message
-    .find()
+    .find({ $or: [{ to: req.currentUser.id }, { from: req.currentUser.id }]})
     .populate('to from')
     .exec()
     .then(messages => res.json(messages))
@@ -10,8 +10,6 @@ function messagesIndex(req, res, next) {
 }
 
 function messagesCreate(req, res, next) {
-
-  if(req.file) req.body.image = req.file.filename;
 
   Message
     .create(req.body)

@@ -9,27 +9,30 @@ const Cat =  ({name, age, gender, type, id, gallery, heroImage, deleteCat, show,
   return (
 
     <Container className="container">
-      {/* {gallery && gallery.map((item, i) => <Row key={i}>
-        <Col>
-          <img src={item.imageSRC} alt={item.caption} />
-        </Col>
-      </Row>)} */}
-      <Row>
-        <Col>
-          {show&& gallery && <img src={heroImage.imageSRC || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyo5A_G2Vzc1vU5Rmljj1vVRVYeH1Fthl0Aplhi4ErssVoLZ9AdA' } alt={name} /> }
-        </Col>
-      </Row>
-      <Row>
+      <h2>{name}</h2>
+
+      <Row className="show-row">
+
         <Col className="info">
-          <h4><em>{name}</em></h4>
-          <h5>{type}</h5>
-          {show && <h5>{age} old</h5>}
-          {show && <p>{gender}</p>}
-          {show && owner &&  <Link to={`/users/${owner.id}`}>{owner.name}</Link>}
+
+          {show && owner &&<div>
+            <h3>Breed: <em>{type}</em></h3>
+            <h5>{name} is {age} old {gender} {type} cat.</h5>
+            <p></p>
+            <p>Owner: {owner.name}</p>
+
+            <Button className="new-button" outline><Link to={`/users/${owner.id}`}><img className="round-image" src={owner.imageSRC} /> Visit {owner.name}`s Profile</Link></Button></div>}
         </Col>
+        <Col className="hero-col">
+          {heroImage && gallery && <img id="hero" src={heroImage.imageSRC || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyo5A_G2Vzc1vU5Rmljj1vVRVYeH1Fthl0Aplhi4ErssVoLZ9AdA'} alt={name} /> }
+        </Col>
+        {show && authenticated && <Col>
+          <Button className="new-button" outline><Link to={`/cats/${id}/images/new`}>Add Photo</Link></Button>
+          <Button className="new-button" outline><Link to={`/messages/${id}`}>Add Photo</Link></Button>
+          <Button className="edit-button" outline><Link to={`/cats/${id}/edit`}>Edit</Link></Button>
+          <Button outline color="danger" onClick={deleteCat}>Delete</Button>
+        </Col>}
       </Row>
-      {show && authenticated && <Link to={`/cats/${id}/edit`} className="btn">Edit</Link>}
-      {show && authenticated && <Button className="btn" onClick={deleteCat}>Delete</Button>}
     </Container>
 
   );

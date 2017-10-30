@@ -11,7 +11,7 @@ import CatsEdit from '../cats/CatsEdit';
 import Profile from '../users/Profile';
 import ProfileEdit from '../users/ProfileEdit';
 import MessagesIndex from '../messages/MessagesIndex';
-import MessagesShow from '../messages/MessagesShow';
+import MessagesForm from '../messages/MessagesForm';
 import CatsImagesNew from '../cats/CatsImagesNew';
 
 const Routes = () => {
@@ -29,7 +29,7 @@ const Routes = () => {
       <ProtectedRoute exact path="/users/:id" component={Profile} />
       <ProtectedRoute path="/users/:id/edit" component={ProfileEdit} />
       <ProtectedRoute exact path="/messages" component={MessagesIndex} />
-      <ProtectedRoute path="/messages/:id" component={MessagesShow} />
+      <ProtectedRoute path="/messages/new" component={MessagesForm} />
     </Switch>
   );
 };

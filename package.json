@@ -31,6 +31,7 @@
     "query-string": "^5.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-places-autocomplete": "^5.4.3",
     "react-router-dom": "^4.2.2",
     "react-widgets": "^4.0.3",
     "reactstrap": "^5.0.0-alpha.3",

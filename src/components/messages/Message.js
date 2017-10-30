@@ -13,7 +13,8 @@ const Message =  ({to, from, text /*, id*/ }) => {
         <Col className="message">
           <p>To: {to.name}</p>
           <p>{text}</p>
-          <Link to={`/users/${from.id}`}>From: {from.name}</Link>
+          <p>From: {from.name}</p>
+
         </Col>
         {/* <Col className="message">
         </Col> */}

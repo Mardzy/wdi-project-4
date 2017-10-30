@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 
-
 const Navbar =  ({history, user}) => {
   console.log(user);
   const authenticated = Auth.isAuthenticated();
@@ -11,6 +10,7 @@ const Navbar =  ({history, user}) => {
   let profileLink = null;
   if(!currentUser && authenticated) return null;
   else profileLink = <Link to={`/users/${currentUser}`} >Profile</Link>;
+
   function logout(e) {
     e.preventDefault();
     Auth.logout();
@@ -23,6 +23,7 @@ const Navbar =  ({history, user}) => {
         <Link className="navbar-brand" to="/">CatMad</Link>
       </div>
       {authenticated && currentUser && profileLink}
+      <Link to="/messages">Inbox</Link>
       <Link to="/index">All Cats</Link>
       {authenticated && <Link to="/new">Add a Cat</Link>}
       {!authenticated && <Link to="/login" >Login</Link>}

@@ -2,8 +2,6 @@ import React from 'react';
 import Axios from 'axios';
 import Cat from './Cat';
 import Auth from '../../lib/Auth';
-import {Link} from 'react-router-dom';
-
 
 class CatsShow extends React.Component {
   state = {
@@ -47,13 +45,12 @@ class CatsShow extends React.Component {
   render() {
     console.log(this.state.cat);
     return (
-      <div className="row show">
+      <div id="cat-show">
         {this.state.cat && <Cat
           {...this.state.cat}
           show={true}
           deleteCat={this.deleteCat}
         ></Cat>}
-        <Link to={`/cats/${this.props.match.params.id}/images/new`}>Add Photo</Link>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import MessageForm from './MessageForm';
+import MessagesForm from './MessagesForm';
 import Axios from 'axios';
 import Auth from '../../lib/Auth';
 
@@ -9,17 +9,13 @@ class Message extends React.Component {
   state = {
     message: {
       text: '',
-      to: '',
-      from: '',
-      image: '',
-      read: ''
+      from: Auth.getPayload().userId,
+      to: this.state.props.match.id
     },
-    error: {
+    errors: {
       text: '',
-      to: '',
       from: '',
-      image: '',
-      read: ''
+      to: ''
     }
   };
 
@@ -30,22 +26,23 @@ class Message extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    Axios.post('/api/login', this.state.credentials)
-      .then((res) =>{
-        Auth.setToken(res.data.token);
-        console.log(res.data.token);
-        this.props.history.push('/index');
+
+    Axios
+      .post('/api/messages', this.state.message, {
+        headers: { 'Authorization': 'Bearer ' + Auth.getToken() }
       })
-      .catch(() => this.setState({ error: 'Unrecognizable user login credentials'}));
+      .then(res => this.setState({ message: res.data.text}, console.log(res.data)))
+      // .then(() => this.props.history.push('/index'))
+      .catch(err => this.setState({ errors: err.response.data.errors }));
   }
 
   render() {
     return (
-      <MessageForm
-        credentials={this.state.credentials}
+      <MessagesForm
+        message={this.state.message}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
-        error={this.state.error}
+        errors={this.state.errors}
         history={this.props.history}
       />
     );
