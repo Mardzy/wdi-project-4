@@ -59,10 +59,45 @@ function deleteRoute(req, res, next) {
     .catch(next);
 }
 
+function createComment(req, res, next) {
+  req.body.createdBy = req.currentUser;
+  User
+    .findById(req.params.id)
+    .populate('comments.createdBy')
+    .exec()
+    .then((user) => {
+      user.comments.push(req.body);
+      return user.save();
+    })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch(next);
+}
+
+function deleteComment(req, res, next) {
+  req.body.createdBy = req.currentUser;
+  User
+    .findById(req.params.id)
+    .exec()
+    .then((user) => {
+      if(!user) return res.notFound();
+
+      const comment = user.comments.id(req.params.commentId);
+      comment.remove();
+
+      return user.save();
+    })
+    .then((user) => res.json(user))
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
   create: createRoute,
   show: showRoute,
   update: updateRoute,
-  delete: deleteRoute
+  delete: deleteRoute,
+  createComment: createComment,
+  deleteComment: deleteComment
 };

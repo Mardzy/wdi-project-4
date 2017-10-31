@@ -1,4 +1,28 @@
-#profile-cats{
+#profile{
   display: flex;
-  align-content: space-around;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  .heading{
+    display: inline-block;
+  }
+  img.profile-image{
+    border-radius: 50%;
+  }
+  #profile-cats{
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-items: center;
+  }
+
+  #cat-hero-col{
+    overflow: scroll;
+    height: 80vh;
+  }
+
+  .google-map{
+    height:50vh;
+    width: 100%;
+    border: lightGray 1px solid;
+  }
 }

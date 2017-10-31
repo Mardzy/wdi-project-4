@@ -32,6 +32,12 @@ router.route('/users/:id')
   .put(imageUpload, users.update)
   .delete(secureRoute, users.delete);
 
+router.route('/users/:id/comments')
+  .post(secureRoute, users.createComment);
+
+router.route('/users/:id/comments/:commentId')
+  .delete(secureRoute, users.deleteComment);
+
 router.route('/conversations')
   .get(secureRoute, conversations.index)
   .post(secureRoute, conversations.create);
@@ -50,5 +56,6 @@ router.route('/login')
   .post(auth.login);
 
 router.all('/*', (req, res) => res.status(400).send('NOT FOUND'));
+
 
 module.exports = router;

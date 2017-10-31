@@ -41,11 +41,13 @@ class MessageShow extends React.Component {
   }
 
   render() {
-    // const {text, to, from, image, read} = this.state.message
     console.log('conversation ==>', this.state.conversation);
+    // console.log('message ==>', this.state.message);
     return (
-      <div>
-        <h1>Conversation Show</h1>
+      <div className="container">
+        {this.state.conversation && <div><h1> Message History for {this.state.conversation.from.name} & {this.state.conversation.to.name}</h1>
+          <p></p>
+        </div>}
         {this.state.conversation && this.state.conversation.messages.map(message =>
           <Row key={message.id}>
             <Link className="btn btn-outline" to={`/users/${message.from.id}`}><img className="round-image" src={message.from.imageSRC} /> Visit {message.from.name}`s Profile</Link>

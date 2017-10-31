@@ -10,7 +10,7 @@ const coordinateSchema = new mongoose.Schema({
 
 const commentSchema = new mongoose.Schema({
   text: {type: String, required: true },
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
 });
 
 const userSchema = new mongoose.Schema({
@@ -23,7 +23,9 @@ const userSchema = new mongoose.Schema({
   image: { type: String, default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWstsZn-GdjM44v3LixeexalwxI1nxFQ3Bs8cIkVU5KPE-6zFVfg' },
   bio: { type: String },
   catOwner: { type: Boolean },
-  comments: [commentSchema]
+  comments: [commentSchema],
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
+
 });
 
 userSchema.virtual('age')

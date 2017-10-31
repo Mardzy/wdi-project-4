@@ -5,7 +5,7 @@ class GoogleMap extends React.Component {
 
   componentDidMount() {
     this.map = new google.maps.Map(this.mapCanvas, {
-      zoom: 10,
+      zoom: 14,
       center: this.props.center || {lat: 51.5771, lng: -0.1783}
     });
 
@@ -22,7 +22,6 @@ class GoogleMap extends React.Component {
   }
 
   render() {
-    console.log('google map', this.map);
     return (
       <div className="google-map" ref={element => this.mapCanvas = element}></div>
     );
