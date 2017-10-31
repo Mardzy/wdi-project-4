@@ -2,14 +2,12 @@ import React from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 class AutoComplete extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { address: 'London, UK' };
-    this.onChange = (address) => this.setState({ address });
+  state = {
+    address: ''
   }
 
-  handleFormSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = (e) => {
+    e.preventDefault();
 
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
@@ -17,14 +15,18 @@ class AutoComplete extends React.Component {
       .catch(error => console.error('Error', error));
   }
 
+  handleChange = (address) => {
+    this.setState({ address });
+  }
+
   render() {
     const inputProps = {
       value: this.state.address,
-      onChange: this.onChange
+      onChange: this.handleChange
     };
 
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <PlacesAutocomplete inputProps={inputProps} />
         <button type="submit">Submit</button>
       </form>

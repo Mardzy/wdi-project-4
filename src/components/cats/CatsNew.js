@@ -12,11 +12,18 @@ class CatsNew extends React.Component {
       type: '',
       owner: Auth.getPayload().userId
     },
+    gallery: {
+      base64: '',
+      imageSRC: '',
+      caption: ''
+    },
+
     errors: {
       name: '',
       dob: '',
       gender: '',
-      type: ''
+      type: '',
+      imageSRC: ''
     }
   };
 
@@ -33,15 +40,29 @@ class CatsNew extends React.Component {
     this.setState({ cat });
   }
 
+  handleGalleryChange = ({ target: { name, value } }) => {
+    const gallery = Object.assign({}, this.state.gallery, { [name]: value });
+    this.setState({ gallery });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-
     Axios
       .post('/api/cats', this.state.cat, {
         headers: { 'Authorization': 'Bearer ' + Auth.getToken() }
       })
-      .then(() => this.props.history.push('/index'))
+      .then((res) => this.postImage(res.data.id))
       .catch(err => this.setState({ errors: err.response.data.errors }));
+  }
+
+  postImage = id => {
+    Axios
+      .post(`/api/cats/${id}/images/`, this.state.gallery, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      .then(() => this.props.history.push(`/cats/${id}`))
+      .catch(err => this.setState({ errors: err.response.data.errors }));
+
   }
 
   render() {
@@ -51,8 +72,11 @@ class CatsNew extends React.Component {
         history={this.props.history}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
+        handleGalleryChange={this.handleGalleryChange}
         cat={this.state.cat}
         errors={this.state.errors}
+        gallery={this.state.gallery}
+        catsNew={true}
       />
     );
   }

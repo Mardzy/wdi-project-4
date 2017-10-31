@@ -20,7 +20,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
           </Alert>}
         </FormGroup>
         <FormGroup className={errors.dob ? 'has-error' : ''}>
-          <Label for="dob">Date of Birth</Label>
+          <Label for="dob">Date of Birth (optional)</Label>
           <Input
             type="date"
             name="dob"

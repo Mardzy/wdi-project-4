@@ -1,10 +1,10 @@
 import React from 'react';
 import BackButton from '../utility/BackButton';
 import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-// import DragDrop from '../utility/DragDrop';
+import DragDrop from '../utility/DragDrop';
 
 
-function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
+function CatsForm ({ history, handleSubmit, handleChange, handleGalleryChange, cat, errors, gallery, catsNew }) {
   return (
     <Container>
       <div className="page-banner col-md-12">
@@ -67,7 +67,14 @@ function CatsForm ({ history, handleSubmit, handleChange, cat, errors }) {
             <small className="text-danger">{errors.type}</small>
           </Alert>}
         </FormGroup>
-        <Button>Submit</Button>
+        {catsNew &&<FormGroup className={errors ? ' has-error' : ''}>
+          <Label for="image">Add Image</Label>
+          <DragDrop
+            onChange={handleGalleryChange}
+            value={gallery.base64 || gallery.imageSRC}
+          />
+        </FormGroup>}
+        <Button outline>Submit</Button>
       </Form>
     </Container>
   );

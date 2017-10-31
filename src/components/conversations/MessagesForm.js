@@ -7,7 +7,13 @@ const MessagesForm = ({ handleChange, handleSubmit, message, errors }) => {
     <Form onSubmit={handleSubmit}>
       <FormGroup className={errors.text ? 'has-error' : ''}>
         <Label for="text">Message</Label>
-        <Input type="textarea" name="text" id="text" value={message.text}  onChange={handleChange}/>
+        <Input
+          type="textarea"
+          name="text"
+          id="text"
+          value={message.text}
+          onChange={handleChange}
+        />
         {errors.text && <Alert color="danger">
           <small>{errors}</small>
         </Alert>}

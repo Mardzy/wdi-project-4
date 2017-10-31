@@ -43,7 +43,7 @@ class CatsShow extends React.Component {
   // }
 
   render() {
-    console.log(this.state.cat);
+    // console.log('cats show', this.state.cat);
     return (
       <div id="cat-show">
         {this.state.cat && <Cat

@@ -2,15 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import {Container, Row, Col, Button } from 'reactstrap';
-
+import GoogleMap from  '../utility/GoogleMap';
 import BackButton from '../utility/BackButton';
 import Auth from '../../lib/Auth';
 
 class Profile extends React.Component {
   state = {
-    user: {
-      cats: []
-    }
+    user: null
   }
 
   componentWillMount() {
@@ -40,7 +38,8 @@ class Profile extends React.Component {
   }
 
   render() {
-    // const User = Auth.getPayload().userId;
+    const userId = Auth.getPayload() ? Auth.getPayload().userId : null;
+    const authenticated = Auth.isAuthenticated();
     const { name, imageSRC, id, cats, bio } = this.state.user;
     // console.log(this.state.user.cats && user);
     return (
@@ -50,17 +49,18 @@ class Profile extends React.Component {
         <Row>
           <Col md={3}>
             <div>
-              <img src={imageSRC || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWstsZn-GdjM44v3LixeexalwxI1nxFQ3Bs8cIkVU5KPE-6zFVfg'} />
+              <img src={imageSRC} />
               <p>{bio}</p>
             </div>
 
-            {/* <h6>{user.age} old</h6> */}
-
-            {Auth.isAuthenticated() && <div>
-              <Button className="new-button" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {name}</Button>
+            {userId !== id &&<Button className="new-button" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {name}</Button>}
+            {authenticated && userId === id && <div>
               <Link className="btn btn-outline edit" to={`/users/${id}/edit`}>Edit Profile</Link>
               <Button outline color="danger" onClick={this.deleteUser}>Delete Profile       </Button>
             </div>}
+            {this.state.user && <GoogleMap
+              center={this.user.location}
+            />}
           </Col>
           <Col md={9}>
             {cats && cats.map(cat => <Row key={cat.id}>
@@ -68,15 +68,9 @@ class Profile extends React.Component {
               <Col md={3}>
                 <Link to={`/cats/${cat.id}`}><img  src={cat.heroImage.imageSRC} /></Link>
               </Col>
-              {/* {cat.gallery.map(item =>
-                <Col md={3} key={item.id}>
-                  <img  src={item.image} />
-                </Col>
-              )} */}
 
             </Row>
             )}
-            {/* <img src={userCat.gallery.image} alt={userCat.name}/> */}
 
           </Col>
         </Row>

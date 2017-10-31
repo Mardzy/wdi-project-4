@@ -1,10 +1,8 @@
 import React from 'react';
 import Axios from 'axios';
-import Message from '../conversations/message';
-// import {Link} from 'react-router-dom';
-import {Container, Row, Col } from 'reactstrap';
+import {Link} from 'react-router-dom';
+import {Container, Row} from 'reactstrap';
 import Auth from '../../lib/Auth';
-// import queryString from 'query-string';
 
 
 class MessageIndex extends React.Component{
@@ -17,27 +15,26 @@ class MessageIndex extends React.Component{
       .get('/api/conversations', {
         headers: { 'Authorization': `Bearer ${Auth.getToken()}` }
       })
-      .then(res => this.setState({conversations: res.data}/*, ()=> console.log(res.data)*/))
+      .then(res => this.setState({ conversations: res.data }/*, ()=> console.log(res.data)*/))
       .catch(err=> console.log(err));
   }
 
   render(){
-    console.log({...this.state.conversations});
+    const userId = Auth.getPayload() ? Auth.getPayload().userId : null;
+    // const authenticated = Auth.isAuthenticated();
     return(
-
       <Container id="conversations-index">
         <h1>Inbox</h1>
-        <Row>
-          {this.state.conversations && this.state.conversations.map(message => {
-            console.log('conversation index', message);
-            return(<Col xs={12} sm={6} md={6} key={message.id}>
-              <Message {...message} index={true}></Message>
-            </Col>);
-          }
-          )}
-        </Row>
+        {this.state.conversations && this.state.conversations.map(conversation =>
+          <Row key={conversation.id}>
+            {userId !== conversation.to.id &&<Link className="btn btn-outline"
+              to={`/conversations/${conversation.id}`}
+            ><img className="round-image" src={conversation.to.imageSRC} />{conversation.to.name}`s Messages </Link> }
+            {/* <Button className="new-button" outline><Link to={`/users/${owner.id}`}> Visit {owner.name}`s Profile</Link>
+          </Button> */}
+          </Row>
+        )}
       </Container>
-
     );
   }
 }

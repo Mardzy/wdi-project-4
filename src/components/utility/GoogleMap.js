@@ -22,6 +22,7 @@ class GoogleMap extends React.Component {
   }
 
   render() {
+    console.log('google map', this.map);
     return (
       <div className="google-map" ref={element => this.mapCanvas = element}></div>
     );

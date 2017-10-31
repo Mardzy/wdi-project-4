@@ -3,6 +3,10 @@ const bcrypt = require('bcrypt');
 const s3 = require('../lib/s3');
 const moment = require('moment');
 
+const coordinateSchema = new mongoose.Schema({
+  lat: Number,
+  lng: Number
+});
 
 const commentSchema = new mongoose.Schema({
   text: {type: String, required: true },
@@ -11,11 +15,12 @@ const commentSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: 'Name is required' },
-  dob: { type: Date },
+  location: coordinateSchema,
+  dob: {type: Date},
   email: { type: String, required: 'Email is required', unique: 'Email address already taken' },
   password: { type: String, required: 'Invalid credentials' },
   // facebookId: { type: String, unique: true, required: false }, // for facebook login
-  image: { type: String },
+  image: { type: String, default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWstsZn-GdjM44v3LixeexalwxI1nxFQ3Bs8cIkVU5KPE-6zFVfg' },
   bio: { type: String },
   catOwner: { type: Boolean },
   comments: [commentSchema]

@@ -1,48 +1,30 @@
-import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
-// import Auth from '../../lib/Auth';
-// import { Link } from 'react-router-dom';
-
-const Message =  ({ messages/*, id*/ }) => {
-  // const currentUser = Auth.getPayload() ? Auth.getPayload().userId : null;
-  // console.log('to', to);
-  // console.log('from',from);
-  console.log(messages);
-
-  return (
-
-    <Container className="container">
-      <Row>
-        {/* {to && to.map(to => {
-
-          console.log('mapping', to);
-          return(
-            <div key={to.id}>
-              <p>{to.name}</p>
-            </div>
-          );
-        })} */}
-        <Col className="message">
-          {/* <p>{to}</p>
-          <p>{from.name}</p> */}
-          {messages && messages.map(message => {
-
-            console.log('message', message);
-            return(
-              <div key={message.id}>
-
-                <p>From: {message.from}</p>
-                <p>{message.text}</p>
-              </div>
-            );
-          })}
-        </Col>
-        {/* <Col className="message">
-        </Col> */}
-      </Row>
-    </Container>
-
-  );
-};
-
-export default Message;
+// import React from 'react';
+// import { Container, Row, Col } from 'reactstrap';
+// // import Auth from '../../lib/Auth';
+// // import { Link } from 'react-router-dom';
+//
+// const Message =  ({ message }) => {
+//   // const currentUser = Auth.getPayload() ? Auth.getPayload().userId : null;
+//   console.log('in message', message);
+//   return (
+//     <Container className="container">
+//       <Row>
+//         <Col className="message">
+//           {message && message.map(item => {
+//             console.log('item', item);
+//             return(
+//               <Row key={item.id}>
+//
+//                 <p className="message">{item.text}</p>
+//               </Row>
+//             );
+//           })}
+//         </Col>
+//
+//       </Row>
+//     </Container>
+//
+//   );
+// };
+//
+// export default Message;

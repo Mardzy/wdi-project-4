@@ -33,7 +33,7 @@ const CatsImagesForm = ({handleSubmit, handleChange, errors, gallery}) => {
             <small>{errors.caption}</small>
           </Alert>}
         </FormGroup>
-        <Button>Submit</Button>
+        <Button outline>Submit</Button>
       </Form>
     </Container>
   );

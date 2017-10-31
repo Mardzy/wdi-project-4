@@ -33,7 +33,7 @@ function conversationsShow(req, res, next) {
   // console.log(req.params.id);
   Conversation
     .findById(req.params.id)
-    // .populate('to from messages')
+    .populate('messages.from to from')
     .exec()
     .then((conversation) => {
       if(!conversation) return res.notFound();

@@ -2,13 +2,15 @@ import React from 'react';
 import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import BackButton from '../utility/BackButton';
 import DragDrop from '../utility/DragDrop';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
+const ProfileForm = ({ handleChange, handleAddress, handleSubmit, user, address, errors }) => {
+  const inputProps = {
+    value: address,
+    onChange: handleAddress
+  };
 
-
-const ProfileForm = ({ handleChange, handleSubmit, user, errors }) => {
-  console.log(user);
   return (
-
     <Container>
       <div className="col-md-12">
         <BackButton history={history} />
@@ -26,6 +28,10 @@ const ProfileForm = ({ handleChange, handleSubmit, user, errors }) => {
           {errors.name && <Alert color="danger">
             <small>{errors.name}</small>
           </Alert>}
+        </FormGroup>
+        <FormGroup className={errors.location ? 'has-error' : ''}>
+          <Label for="address">Address</Label>
+          <PlacesAutocomplete inputProps={inputProps} />
         </FormGroup>
         <FormGroup className={errors.dob ? 'has-error' : ''}>
           <Label for="dob">Date of Birth</Label>

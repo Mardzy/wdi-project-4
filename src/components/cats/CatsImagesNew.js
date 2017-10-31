@@ -40,6 +40,7 @@ class CatsImagesNew extends React.Component {
         this.props.history.push(`/cats/${this.props.match.params.id}`);
       })
       .catch(err => this.setState({ errors: err.response.data.errors }));
+
   }
 
   render() {
