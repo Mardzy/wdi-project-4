@@ -10,6 +10,13 @@ const ProfileForm = ({ handleChange, handleAddress, handleSubmit, user, address,
     onChange: handleAddress
   };
 
+  const cssClasses = {
+    root: 'form-group',
+    input: 'form-control',
+    autocompleteContainer: 'my-autocomplete-container'
+  };
+
+
   return (
     <Container>
       <div className="col-md-12">
@@ -31,7 +38,7 @@ const ProfileForm = ({ handleChange, handleAddress, handleSubmit, user, address,
         </FormGroup>
         <FormGroup className={errors.location ? 'has-error' : ''}>
           <Label for="address">Address</Label>
-          <PlacesAutocomplete inputProps={inputProps} />
+          <PlacesAutocomplete inputProps={inputProps} classNames={cssClasses}/>
         </FormGroup>
         <FormGroup className={errors.dob ? 'has-error' : ''}>
           <Label for="dob">Date of Birth</Label>

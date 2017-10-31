@@ -8,15 +8,17 @@ import Auth from '../../lib/Auth';
 
 class Profile extends React.Component {
   state = {
-    user: null
+    user: null,
+    location: {}
   }
 
   componentWillMount() {
+    console.log(this.props.match.params.id);
     Axios
       .get(`/api/users/${this.props.match.params.id}`)
-      .then(res => this.setState({ user: res.data }))
+      .then(res => this.setState({ user: res.data }, () => console.log(res)))
       .catch(err => {
-        if(err.response.status === 404) return this.props.history.replace('/404');
+        if(err.response && err.response.status === 404) return this.props.history.replace('/404');
         console.log(err);
       });
   }
@@ -38,6 +40,7 @@ class Profile extends React.Component {
   }
 
   render() {
+    if(!this.state.user) return null;
     const userId = Auth.getPayload() ? Auth.getPayload().userId : null;
     const authenticated = Auth.isAuthenticated();
     const { name, imageSRC, id, cats, bio } = this.state.user;
@@ -49,7 +52,7 @@ class Profile extends React.Component {
         <Row>
           <Col md={3}>
             <div>
-              <img src={imageSRC} />
+              {imageSRC && <img src={imageSRC} />}
               <p>{bio}</p>
             </div>
 
@@ -58,7 +61,7 @@ class Profile extends React.Component {
               <Link className="btn btn-outline edit" to={`/users/${id}/edit`}>Edit Profile</Link>
               <Button outline color="danger" onClick={this.deleteUser}>Delete Profile       </Button>
             </div>}
-            {this.state.user && <GoogleMap
+            {this.state.user.location && <GoogleMap
               center={this.user.location}
             />}
           </Col>
@@ -66,7 +69,7 @@ class Profile extends React.Component {
             {cats && cats.map(cat => <Row key={cat.id}>
               <h4>{cat.name}</h4>
               <Col md={3}>
-                <Link to={`/cats/${cat.id}`}><img  src={cat.heroImage.imageSRC} /></Link>
+                {cat && <Link to={`/cats/${cat.id}`}>{cat.heroImage && <img src={cat.heroImage.imageSRC} />}</Link>}
               </Col>
 
             </Row>

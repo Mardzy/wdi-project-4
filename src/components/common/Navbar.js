@@ -22,7 +22,7 @@ const Navbar =  ({history}) => {
         <Link className="navbar-brand" to="/">CatMad</Link>
       </div>
       {authenticated && currentUser && profileLink}
-      <Link to="/conversations">Inbox</Link>
+      {authenticated && <Link to="/conversations">Inbox</Link>}
       <Link to="/index">All Cats</Link>
       {authenticated && <Link to="/new">Add a Cat</Link>}
       {!authenticated && <Link to="/login" >Login</Link>}

@@ -15,7 +15,14 @@ class ProfileEdit extends React.Component {
       id: ''
     },
     address: '',
-    errors: {}
+    errors: {
+      name: '',
+      location: {},
+      dob: '',
+      email: '',
+      imageSRC: '',
+      id: ''
+    }
   };
 
   componentDidMount() {
