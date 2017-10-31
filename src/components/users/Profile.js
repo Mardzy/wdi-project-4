@@ -44,7 +44,6 @@ class Profile extends React.Component {
     const userId = Auth.getPayload() ? Auth.getPayload().userId : null;
     const authenticated = Auth.isAuthenticated();
     const { name, imageSRC, id, cats, bio } = this.state.user;
-    // console.log(this.state.user.cats && user);
     return (
       <Container>
         <BackButton history={this.props.history} />
@@ -55,22 +54,21 @@ class Profile extends React.Component {
               {imageSRC && <img src={imageSRC} />}
               <p>{bio}</p>
             </div>
-
             {userId !== id &&<Button className="new-button" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {name}</Button>}
             {authenticated && userId === id && <div>
               <Link className="btn btn-outline edit" to={`/users/${id}/edit`}>Edit Profile</Link>
               <Button outline color="danger" onClick={this.deleteUser}>Delete Profile       </Button>
             </div>}
             {this.state.user.location && <GoogleMap
-              center={this.user.location}
+              center={this.state.user.location}
             />}
           </Col>
-          <Col md={9}>
-            {cats && cats.map(cat => <Row key={cat.id}>
+          <Col>
+            {cats && cats.map(cat => <Row id="profile-cats" key={cat.id}>
               <h4>{cat.name}</h4>
-              <Col md={3}>
-                {cat && <Link to={`/cats/${cat.id}`}>{cat.heroImage && <img src={cat.heroImage.imageSRC} />}</Link>}
-              </Col>
+
+              {cat && <Link to={`/cats/${cat.id}`}>{cat.heroImage && <img src={cat.heroImage.imageSRC} />}</Link>}
+
 
             </Row>
             )}

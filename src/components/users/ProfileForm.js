@@ -5,6 +5,7 @@ import DragDrop from '../utility/DragDrop';
 import PlacesAutocomplete from 'react-places-autocomplete';
 
 const ProfileForm = ({ handleChange, handleAddress, handleSubmit, user, address, errors }) => {
+
   const inputProps = {
     value: address,
     onChange: handleAddress
@@ -15,7 +16,6 @@ const ProfileForm = ({ handleChange, handleAddress, handleSubmit, user, address,
     input: 'form-control',
     autocompleteContainer: 'my-autocomplete-container'
   };
-
 
   return (
     <Container>
@@ -38,7 +38,7 @@ const ProfileForm = ({ handleChange, handleAddress, handleSubmit, user, address,
         </FormGroup>
         <FormGroup className={errors.location ? 'has-error' : ''}>
           <Label for="address">Address</Label>
-          <PlacesAutocomplete inputProps={inputProps} classNames={cssClasses}/>
+          <PlacesAutocomplete className="form-control" inputProps={inputProps} classNames={cssClasses}/>
         </FormGroup>
         <FormGroup className={errors.dob ? 'has-error' : ''}>
           <Label for="dob">Date of Birth</Label>

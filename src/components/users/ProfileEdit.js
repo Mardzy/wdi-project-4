@@ -15,14 +15,7 @@ class ProfileEdit extends React.Component {
       id: ''
     },
     address: '',
-    errors: {
-      name: '',
-      location: {},
-      dob: '',
-      email: '',
-      imageSRC: '',
-      id: ''
-    }
+    errors: {}
   };
 
   componentDidMount() {
@@ -44,7 +37,7 @@ class ProfileEdit extends React.Component {
       .then(results => getLatLng(results[0]))
       .then(latLng => {
         const user = Object.assign({}, this.state.user, { location: latLng });
-        this.setState({ user });
+        this.setState({ user }, this.updateUser);
       });
   }
 

@@ -4,7 +4,6 @@ import Auth from '../../lib/Auth';
 import { Link } from 'react-router-dom';
 
 const Cat =  ({name, age, gender, type, id, heroImage, deleteCat, show, owner }) => {
-  // console.log('showing owner', owner);
   const userId = Auth.getPayload() ? Auth.getPayload().userId : null;
   const authenticated = Auth.isAuthenticated();
   return (
@@ -17,7 +16,6 @@ const Cat =  ({name, age, gender, type, id, heroImage, deleteCat, show, owner })
         <Col className="info">
           {show && owner &&<div>
             <h5>{name} is a {age} old {gender} {type} cat.</h5>
-            <p></p>
             <p>Owner: {owner.name}</p>
             <Link className="btn btn-outline" to={`/users/${owner.id}`}><img className="round-image" src={owner.imageSRC} /> Visit {owner.name}`s Profile</Link>
           </div>}
@@ -32,7 +30,6 @@ const Cat =  ({name, age, gender, type, id, heroImage, deleteCat, show, owner })
         </Col>}
       </Row>
     </Container>
-
   );
 };
 
