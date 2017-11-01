@@ -2,8 +2,15 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  .heading{
-    display: inline-block;
+  .col.col-md-2{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .buttons{
+      display: inline-block;
+    }
   }
   img.profile-image{
     height: 140px;
@@ -12,10 +19,17 @@
     border-radius: 50%;
   }
   #profile-cats{
+    margin-top: -32px;
+
     display: flex;
     flex-direction: column;
     align-content: space-around;
     align-items: center;
+    img{
+      height: 50vh;
+      object-fit: cover;
+      border-radius: 5px;
+    }
   }
 
   #cat-hero-col{
@@ -26,6 +40,7 @@
   .google-map{
     height:50vh;
     width: 100%;
+    border-radius: 5px;
     border: lightGray 1px solid;
   }
 }

@@ -51,9 +51,7 @@ const User = require('../models/user');
 //     .catch(next);
 // }
 
-function facebook(req, res ,next){
-  console.log('querystring', req.query);
-  console.log('body',req.body);
+function facebook(req, res, next) {
   rp({
     method: 'POST',
     url: 'https://graph.facebook.com/v2.10/oauth/access_token',
@@ -66,41 +64,35 @@ function facebook(req, res ,next){
     json: true
   })
     .then(token => {
-      console.log(token);
       return rp({
         method: 'GET',
-        url: 'https://graph.facebook.com/v2.5/me?fields=id,email,name,picture',
+        url: 'https://graph.facebook.com/v2.5/me?fields=id,email,name,picture.type(large)',
         qs: token,
         json: true
       });
     })
     .then(profile => {
-      console.log(profile);
-      return User.findOne({ $or: [{ facebook_id: profile.id }, { email: profile.email }] })
+      return User.findOne({
+        $or: [{ facebookId: profile.id }, { email: profile.email }]
+      })
         .then(user => {
           if(!user) {
             user = new User({
-              username: profile.name,
-              image: profile.picture.data.url
+              name: profile.name
             });
           }
-
-          user.facebookId = profile.id;
+          user.facbookId = profile.id;
           if(profile.email) user.email = profile.email;
-
-          return user.save();
-        })
-        .then(user => {
-          console.log(user);
-
-          const payload = { userId: user.id };
-          const token = jwt.sign(payload, secret, { expiresIn: '1hr'});
-
-          res.json({ token, message: `Welcome ${user.username}`});
-        })
-        .catch(next);
-    });
+          user.image = profile.picture.data.url;
+          return user.save((err)=> console.log(err));
+        });
+    })
+    .then(user => {
+      const payload = { userId: user.id };
+      const token = jwt.sign(payload, secret, { expiresIn: '1hr' });
+      res.json({ token, message: `Welcome ${user.username}`});
+    })
+    .catch(next);
 }
-
 
 module.exports = { facebook };

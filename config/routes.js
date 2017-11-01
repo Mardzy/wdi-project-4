@@ -17,6 +17,12 @@ router.route('/cats/:id')
   .put(secureRoute, cats.update)
   .delete(secureRoute, cats.delete);
 
+router.route('/cats/:id/comments')
+  .post(secureRoute, cats.createComment);
+
+router.route('/cats/:id/comments/:commentId')
+  .delete(secureRoute, cats.deleteComment);
+
 router.route('/cats/:id/images')
   .post(secureRoute, imageUpload, cats.imagesCreate)
   .delete(secureRoute, cats.imagesDelete);
@@ -34,11 +40,6 @@ router.route('/users/:id')
   .put(imageUpload, users.update)
   .delete(secureRoute, users.delete);
 
-router.route('/users/:id/comments')
-  .post(secureRoute, users.createComment);
-
-router.route('/users/:id/comments/:commentId')
-  .delete(secureRoute, users.deleteComment);
 
 router.route('/conversations')
   .get(secureRoute, conversations.index)
@@ -58,7 +59,8 @@ router.route('/login')
   .post(auth.login);
 
 router.route('/oauth/facebook')
-.post(oauth.facebook);
+  .post(oauth.facebook);
+
 router.all('/*', (req, res) => res.status(400).send('NOT FOUND'));
 
 

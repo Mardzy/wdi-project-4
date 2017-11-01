@@ -16,7 +16,7 @@ mongoose.connect(dbURI, { useMongoClient: true })
       .create([{
         name: 'Paul',
         dob: '1983-12-19',
-        email: 'mardlingp@gmail.com',
+        email: 'mardlingp@mail.com',
         password: 'password',
         passwordConfirmation: 'password',
         image: '',
@@ -40,18 +40,7 @@ mongoose.connect(dbURI, { useMongoClient: true })
       }])
       .then(users => {
         console.log(`${users.length} users created`);
-        users[0].comments.push({
-          createdBy: users[1],
-          text: 'Yo have a nice cat'
-        });
-        users[1].comments.push({
-          createdBy: users[2],
-          text: 'What beautiful cat you have'
-        });
-        users[2].comments.push({
-          createdBy: users[0],
-          text: 'He has such a squishy face'
-        });
+
 
         const promises = [
           users[0].save(),
@@ -67,29 +56,36 @@ mongoose.connect(dbURI, { useMongoClient: true })
             from: users[0],
             to: users[1],
             messages: [{
-              text: 'Hello there Juls',
+              text: 'Hi Juls, you have a beautiful cat.',
               from: users[0]
             }]
           }, {
             from: users[1],
             to: users[0],
             messages: [{
-              text: 'Well Hello there Paul, how are you?',
+              text: 'Thank you Paul, he is lovely.',
               from: users[1]
             }]
           }, {
             from: users[2],
             to: users[0],
             messages: [{
-              text: 'Hello there Paul',
+              text: 'Hello there Paul, I like your kitten, she is cute',
               from: users[2]
             }]
           }, {
             from: users[0],
             to: users[2],
             messages: [{
-              text: 'Hi Hermione',
+              text: 'Hello Hermione, thank you for the message.',
               from: users[0]
+            }]
+          }, {
+            from: users[1],
+            to: users[2],
+            messages: [{
+              text: 'Hello Hermione your cat looks funny.',
+              from: users[1]
             }]
           }])
           .then(messages => {
@@ -101,23 +97,40 @@ mongoose.connect(dbURI, { useMongoClient: true })
                 gender: 'female',
                 type: 'Persian British short hair',
                 gallery: [],
-                owner: users[0]
+                owner: users[0],
+                comments: []
               }, {
                 name: 'Toki',
                 dob: '2011-12-25',
                 gender: 'male',
                 type: 'Persian British short hair',
                 gallery: [],
-                owner: users[1]
+                owner: users[1],
+                comments: []
               }, {
                 name: 'Crookshanks',
                 dob: '1998-04-15',
                 gender: 'male',
                 type: 'Persian',
                 gallery: [],
-                owner: users[2]
+                owner: users[2],
+                comments: []
               }])
-              .then(cats => console.log(`${cats.length} cats created.`));
+              .then(cats => {
+                console.log(`${cats.length} cats created.`);
+                cats[0].comments.push({
+                  createdBy: users[1],
+                  text: 'Yo have a nice cat'
+                });
+                cats[1].comments.push({
+                  createdBy: users[2],
+                  text: 'What beautiful cat you have'
+                });
+                cats[2].comments.push({
+                  createdBy: users[0],
+                  text: 'He has such a squishy face'
+                });
+              });
           });
       });
   })

@@ -6,19 +6,22 @@ a.btn{
   margin: 5px 0;
   color: rgb(205, 90, 36);
   font-weight: bolder;
-  cursor: default;
+  width: 125px;
 }
 
 .btn.facebook{
   background-color: rgb(50, 89, 162);
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 .btn.add{
   color: rgb(104, 140, 96);
   font-weight: bolder;
   border: rgb(104, 140, 96) 2px solid;
+  cursor: pointer;
+  width: 125px;
   &:hover {
     background-color: white;
   }
@@ -27,6 +30,8 @@ a.btn{
 .btn.back{
   border: none;
   color: rgb(49, 48, 51);
+  cursor: pointer;
+  width: 125px;
   &:hover {
     background-color: white;
   }
@@ -35,8 +40,9 @@ a.btn{
 .btn.delete{
   color: rgb(159, 11, 14);
   border: rgb(159, 11, 14) 2px solid;
-
+  cursor: pointer;
   font-weight: bolder;
+  width: 125px;
   &:hover {
     background-color: white;
   }

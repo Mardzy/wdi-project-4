@@ -40,7 +40,7 @@ const LoginForm = ({ handleChange, handleSubmit, credentials, error }) => {
         {error.invalid && <Alert color="danger">
           <small>{error.invalid}</small>
         </Alert>}
-        <Button outline>Submit</Button>
+        <Button outline className="add">Submit</Button>
       </Form>
       <OAuthButton provider="facebook">Login with Facebook</OAuthButton>
 

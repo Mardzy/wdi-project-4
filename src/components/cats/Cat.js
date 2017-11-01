@@ -26,7 +26,7 @@ const Cat =  ({name, age, gender, type, id, heroImage, deleteCat, show, owner })
         {show && owner&& authenticated && userId === owner.id && <Col md={2}>
           <Link className="btn btn-outline add" to={`/cats/${id}/images/new`}>Add Photo</Link>
           <Link className="btn btn-outline edit" to={`/cats/${id}/edit`}>Edit Cat</Link>
-          <Button outline color="danger" onClick={deleteCat}>Delete</Button>
+          <Button outline className="delete" onClick={deleteCat}>Delete</Button>
         </Col>}
       </Row>
     </Container>

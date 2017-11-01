@@ -7,6 +7,11 @@ const imageSchema = new mongoose.Schema({
   caption: { type: String }
 });
 
+const commentSchema = new mongoose.Schema({
+  text: {type: String, required: true },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
+});
+
 imageSchema
   .path('image')
   .set(function getPreviousSrc(image) {
@@ -39,7 +44,8 @@ const catSchema = new mongoose.Schema({
   gender: { type: String, required: 'Gender is required' },
   type: { type: String },
   gallery: [ imageSchema ],
-  owner: { type: mongoose.Schema.ObjectId, ref: 'User' }
+  owner: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  comments: [commentSchema]
 });
 
 catSchema.virtual('heroImage')

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
-import {Container, Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 import GoogleMap from  '../utility/GoogleMap';
 import BackButton from '../utility/BackButton';
-import CommentForm from '../utility/CommentForm';
 import Auth from '../../lib/Auth';
 
 class Profile extends React.Component {
@@ -19,7 +18,7 @@ class Profile extends React.Component {
     }
   }
 
-  getInfo = () => {
+  componentDidMount () {
     Axios
       .get(`/api/users/${this.props.match.params.id}`)
       .then(res => this.setState({ user: res.data }/*, () => console.log(res)*/))
@@ -27,10 +26,6 @@ class Profile extends React.Component {
         if(err.response && err.response.status === 404) return this.props.history.reuser('/404');
         console.log(err);
       });
-  }
-
-  componentWillMount() {
-    this.getInfo();
   }
 
   deleteUser = () => {
@@ -49,90 +44,48 @@ class Profile extends React.Component {
 
   }
 
-  deleteComment = (commentId) => {
-    Axios
-      .delete(`/api/users/${this.props.match.params.id}/comments/${commentId}`, {
-        headers: { 'Authorization': 'Bearer ' + Auth.getToken() }
-      })
-      .then(() => this.getInfo())
-      .catch(err => console.log(err));
+  render() {
+    if(!this.state.user) return null;
+    const userId = Auth.getPayload() ? Auth.getPayload().userId : null;
+    const authenticated = Auth.isAuthenticated();
+    const { name, imageSRC, id, cats, bio } = this.state.user;
+    return (
+      <div id="profile" className="container-fluid">
+        <div className="page-banner">
+          <BackButton history={this.props.history} />
+          <h2>{name}`s Profile</h2>
+        </div>
+        <div id="profile" className="container-fluid">
+
+          <Row>
+            <Col md={2}>
+              <div>
+                {imageSRC && <img className="profile-image" src={imageSRC} />}
+                <p>{bio}</p>
+              </div>
+              {userId !== id &&<Button className="new-button" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {name}</Button>}
+              {authenticated && userId === id && <div className="buttons">
+                <Link className="btn btn-outline edit" to={`/users/${id}/edit`}>Edit Profile</Link>
+                <Button outline className="delete" onClick={this.deleteUser}>Delete Profile   </Button>
+              </div>}
+            </Col>
+            <Col id="cat-hero-col">
+              {cats && cats.map(cat => <Col id="profile-cats" key={cat.id}>
+                <h4>{cat.name}</h4>
+                {cat && <Link to={`/cats/${cat.id}`}>{cat.heroImage && <img src={cat.heroImage.imageSRC} />}</Link>}
+              </Col>
+              )}
+            </Col>
+            <Col>
+              {this.state.user.location && <GoogleMap
+                center={this.state.user.location}
+              />}
+            </Col>
+          </Row>
+        </div>
+      </div>
+    );
   }
-
- handleChange = ({ target: { value } }) => {
-   this.setState({ comment: value });
- }
-
- handleSubmit = e => {
-   e.preventDefault();
-   Axios
-     .post(`/api/users/${this.props.match.params.id}/comments`, { text: this.state.newComment }, {
-       headers: { 'Authorization': 'Bearer ' + Auth.getToken() }
-     })
-     .then(res => this.setState({ user: res.data, comment: '' }))
-     .catch(err => console.log(err.response.data));
- }
-
- isOwner(comment) {
-   return Auth.getPayload() && Auth.getPayload().userId === comment.createdBy.id;
- }
-
- render() {
-   if(!this.state.user) return null;
-   const userId = Auth.getPayload() ? Auth.getPayload().userId : null;
-   const authenticated = Auth.isAuthenticated();
-   const { name, imageSRC, id, cats, bio } = this.state.user;
-   return (
-     <Container id="profile">
-       <div className="page-banner">
-         <BackButton history={this.props.history} />
-         <h2>{name}`s Profile</h2>
-       </div>
-       <Row>
-         <Col md={2}>
-
-           <div>
-             {imageSRC && <img className="profile-image" src={imageSRC} />}
-             <p>{bio}</p>
-           </div>
-           {userId !== id &&<Button className="new-button" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {name}</Button>}
-           {authenticated && userId === id && <div>
-             <Link className="btn btn-outline edit" to={`/users/${id}/edit`}>Edit Profile</Link>
-             <Button outline className="delete" onClick={this.deleteUser}>Delete Profile       </Button>
-           </div>}
-         </Col>
-         <Col id="cat-hero-col">
-           {cats && cats.map(cat => <Col id="profile-cats" key={cat.id}>
-             <h4>{cat.name}</h4>
-             {cat && <Link to={`/cats/${cat.id}`}>{cat.heroImage && <img src={cat.heroImage.imageSRC} />}</Link>}
-           </Col>
-           )}
-         </Col>
-         <Col>
-           {this.state.user.location && <GoogleMap
-             center={this.state.user.location}
-           />}
-           {authenticated && <CommentForm
-             comment={this.state.comment}
-             handleSubmit={this.handleSubmit}
-             handleChange={this.handleChange}
-             errors={this.state.errors}
-           />}
-           {!this.state.user.comments && <p>Loading comments...</p>}
-           {this.state.user.comments && this.state.user.comments.map(comment =>{
-             console.log('logging inside map comment',comment);
-             <Row key={comment.id}>
-               By: <small>{comment.createdBy.name}</small>
-               <p>{comment.text}</p>
-               {authenticated && /*this.isOwner(comment) &&*/
-                 <Button className="round-delete" onClick={() => this.deleteComment(comment.id)}>X</Button>}
-             </Row>;
-           }
-           )}
-         </Col>
-       </Row>
-     </Container>
-   );
- }
 }
 
 export default Profile;

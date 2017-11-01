@@ -111,12 +111,47 @@ function catsImagesDelete(req, res, next) {
     .catch(next);
 }
 
+function createComment(req, res, next) {
+  req.body.createdBy = req.currentUser;
+  Cat
+    .findById(req.params.id)
+    .populate('comments.createdBy')
+    .exec()
+    .then((user) => {
+      user.comments.push(req.body);
+      return user.save();
+    })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch(next);
+}
+
+function deleteComment(req, res, next) {
+  req.body.createdBy = req.currentUser;
+  Cat
+    .findById(req.params.id)
+    .exec()
+    .then((user) => {
+      if(!user) return res.notFound();
+
+      const comment = user.comments.id(req.params.commentId);
+      comment.remove();
+
+      return user.save();
+    })
+    .then((user) => res.json(user))
+    .catch(next);
+}
+
 module.exports = {
   index: catsIndex,
   create: catsCreate,
   show: catsShow,
   update: catsUpdate,
   delete: catsDelete,
+  createComment: createComment,
+  deleteComment: deleteComment,
   imagesShow: catsImagesShow,
   imagesCreate: catsImagesCreate,
   imagesDelete: catsImagesDelete

@@ -8,22 +8,18 @@ const coordinateSchema = new mongoose.Schema({
   lng: Number
 });
 
-const commentSchema = new mongoose.Schema({
-  text: {type: String, required: true },
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
-});
+
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: 'Name is required' },
   location: coordinateSchema,
   dob: {type: Date},
-  email: { type: String, required: 'Email is required', unique: 'Email address already taken' },
-  password: { type: String, required: 'Invalid credentials' },
-  // facebookId: { type: String, unique: true, required: false }, // for facebook login
+  email: { type: String, unique: 'Email address already taken' },
+  password: { type: String },
+  facebookId: { type: String }, // for facebook login
   image: { type: String, default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWstsZn-GdjM44v3LixeexalwxI1nxFQ3Bs8cIkVU5KPE-6zFVfg' },
   bio: { type: String },
-  catOwner: { type: Boolean },
-  comments: [commentSchema]
+  catOwner: { type: Boolean }
 });
 
 userSchema.virtual('age')
@@ -98,6 +94,7 @@ userSchema
   .virtual('imageSRC')
   .get(function getImageSRC() {
     if(!this.image) return null;
+    if(this.image.match(/^http/)) return this.image;
     return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.image}`;
   });
 
