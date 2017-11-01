@@ -63,15 +63,13 @@ function createComment(req, res, next) {
   req.body.createdBy = req.currentUser;
   User
     .findById(req.params.id)
-    .populate('comments.createdBy')
     .exec()
     .then((user) => {
       user.comments.push(req.body);
       return user.save();
     })
-    .then((user) => {
-      res.json(user);
-    })
+    .then(user => User.populate(user, { path: 'comments.createdBy '}))
+    .then(user => res.json(user))
     .catch(next);
 }
 

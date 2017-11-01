@@ -3,6 +3,9 @@ import Axios from 'axios';
 import Cat from './Cat';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col } from 'reactstrap';
+import BackButton from '../utility/BackButton';
+
+
 
 class CatsIndex extends React.Component{
   state = {
@@ -26,7 +29,10 @@ class CatsIndex extends React.Component{
     return(
 
       <Container>
-        <h2>Cats to Visit</h2>
+        <div className="page-banner">
+          <BackButton history={history} />
+          <h2>Cats to Visit</h2>
+        </div>
         <Row id="cat-index">
           {this.state.cats && this.state.cats.map(cat =>
             <Col xs={12} sm={6} md={4} key={cat.id}>

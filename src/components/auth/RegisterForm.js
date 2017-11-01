@@ -71,8 +71,9 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
             <small>{errors.passwordConfirmation}</small>
           </Alert>}
         </FormGroup>
-        <Button outline>Submit</Button>
+        <Button outline className="add">Submit</Button>
       </Form>
+
     </Container>
 
   );

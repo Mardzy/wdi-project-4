@@ -1,3 +1,43 @@
-.facebook{
+a.btn{
+}
+
+.btn.edit{
+  border: 2px solid rgb(205, 90, 36);
+  margin: 5px 0;
+  color: rgb(205, 90, 36);
+  font-weight: bolder;
+  cursor: default;
+}
+
+.btn.facebook{
   background-color: rgb(50, 89, 162);
+  color: white;
+  border: none;
+}
+
+.btn.add{
+  color: rgb(104, 140, 96);
+  font-weight: bolder;
+  border: rgb(104, 140, 96) 2px solid;
+  &:hover {
+    background-color: white;
+  }
+}
+
+.btn.back{
+  border: none;
+  color: rgb(49, 48, 51);
+  &:hover {
+    background-color: white;
+  }
+}
+
+.btn.delete{
+  color: rgb(159, 11, 14);
+  border: rgb(159, 11, 14) 2px solid;
+
+  font-weight: bolder;
+  &:hover {
+    background-color: white;
+  }
 }

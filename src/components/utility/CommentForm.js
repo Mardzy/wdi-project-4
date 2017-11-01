@@ -6,7 +6,7 @@ function CommentForm({ comment, handleSubmit, handleChange, errors }) {
   return (
     <Form onSubmit={handleSubmit} className="col-md-6">
       <FormGroup className={errors.comment ? ' has-error' : ''}>
-        <Label for="comment">comment</Label>
+        <Label id="reviews" for="comment">Reviews</Label>
         <Input
           type="text"
           className="form-control"

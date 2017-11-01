@@ -6,7 +6,7 @@ import Navbar from './components/common/Navbar';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './scss/style.scss';
-
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 class App extends React.Component {
 

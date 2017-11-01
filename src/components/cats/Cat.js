@@ -7,7 +7,7 @@ const Cat =  ({name, age, gender, type, id, heroImage, deleteCat, show, owner })
   const userId = Auth.getPayload() ? Auth.getPayload().userId : null;
   const authenticated = Auth.isAuthenticated();
   return (
-    <Container className="container-fluid">
+    <Container className="container">
       {!show && <div>
         <h2>{name}</h2>
         <h6>Breed: <em>{type}</em></h6>
@@ -24,7 +24,7 @@ const Cat =  ({name, age, gender, type, id, heroImage, deleteCat, show, owner })
           {heroImage && <img id="hero" src={heroImage.imageSRC} alt={name} /> }
         </Col>
         {show && owner&& authenticated && userId === owner.id && <Col md={2}>
-          <Link className="btn btn-outline new" to={`/cats/${id}/images/new`}>Add Photo</Link>
+          <Link className="btn btn-outline add" to={`/cats/${id}/images/new`}>Add Photo</Link>
           <Link className="btn btn-outline edit" to={`/cats/${id}/edit`}>Edit Cat</Link>
           <Button outline color="danger" onClick={deleteCat}>Delete</Button>
         </Col>}

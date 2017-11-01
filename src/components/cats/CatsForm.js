@@ -7,8 +7,9 @@ import DragDrop from '../utility/DragDrop';
 function CatsForm ({ history, handleSubmit, handleChange, handleGalleryChange, cat, errors, gallery, catsNew }) {
   return (
     <Container>
-      <div className="page-banner col-md-12">
+      <div className="page-banner">
         <BackButton history={history} />
+        <h2>Add a Cat</h2>
       </div>
       <Form onSubmit={handleSubmit}>
         <FormGroup className={errors ? 'has-error' : ''}>
@@ -74,7 +75,7 @@ function CatsForm ({ history, handleSubmit, handleChange, handleGalleryChange, c
             value={gallery.base64 || gallery.imageSRC}
           />
         </FormGroup>}
-        <Button outline>Submit</Button>
+        <Button outline className="add">Submit</Button>
       </Form>
     </Container>
   );

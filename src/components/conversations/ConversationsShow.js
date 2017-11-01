@@ -2,9 +2,10 @@ import React from 'react';
 import Axios from 'axios';
 import MessagesForm from './MessagesForm';
 import { Row } from 'reactstrap';
-// import MessagesNew from './MessagesNew';
 import Auth from '../../lib/Auth';
 import { Link } from 'react-router-dom';
+import BackButton from '../utility/BackButton';
+
 
 
 class MessageShow extends React.Component {
@@ -45,8 +46,9 @@ class MessageShow extends React.Component {
     // console.log('message ==>', this.state.message);
     return (
       <div className="container">
-        {this.state.conversation && <div><h1> Message History for {this.state.conversation.from.name} & {this.state.conversation.to.name}</h1>
-          <p></p>
+        {this.state.conversation && <div className="page-banner">
+          <BackButton history={history} />
+          <h2>Message History for {this.state.conversation.from.name} & {this.state.conversation.to.name}</h2>
         </div>}
         {this.state.conversation && this.state.conversation.messages.map(message =>
           <Row key={message.id}>

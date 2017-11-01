@@ -66,31 +66,31 @@ mongoose.connect(dbURI, { useMongoClient: true })
           .create([{
             from: users[0],
             to: users[1],
-            messages: {
+            messages: [{
               text: 'Hello there Juls',
               from: users[0]
-            }
+            }]
           }, {
             from: users[1],
             to: users[0],
-            messages: {
+            messages: [{
               text: 'Well Hello there Paul, how are you?',
               from: users[1]
-            }
+            }]
           }, {
             from: users[2],
             to: users[0],
-            messages: {
+            messages: [{
               text: 'Hello there Paul',
               from: users[2]
-            }
+            }]
           }, {
             from: users[0],
             to: users[2],
-            messages: {
+            messages: [{
               text: 'Hi Hermione',
               from: users[0]
-            }
+            }]
           }])
           .then(messages => {
             console.log(`${messages.length} messages created.`);

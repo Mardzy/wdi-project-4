@@ -19,15 +19,9 @@ function conversationsCreate(req, res, next) {
       if(!conversation) return Conversation.create(req.body);
       else return conversation;
     })
-    // .then(conversation => {
-    //   const message = conversation.messages.create(req.body);
-    //   conversation.messages.push(message);
-    //   return conversation.save();
-    // })
     .then(conversation => res.json(conversation))
     .catch(next);
 }
-
 
 function conversationsShow(req, res, next) {
   // console.log(req.params.id);

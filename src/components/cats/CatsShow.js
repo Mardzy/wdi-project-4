@@ -14,10 +14,6 @@ class CatsShow extends React.Component {
     Axios.get(`/api/cats/${this.props.match.params.id}`)
       .then(res => this.setState({ cat: res.data }/*() => console.log(res.data)*/))
       .catch(err => console.log(err));
-    // Axios
-    //   .get('/api/users')
-    //   .then(res => this.setState({users: res.data}/*, ()=> console.log(res.data)*/))
-    //   .catch(err=> console.log(err));
   }
 
   deleteCat = () => {
@@ -28,22 +24,9 @@ class CatsShow extends React.Component {
       .then(() => this.props.history.push('/index'))
       .catch(err => console.log(err));
   }
-  // createGalleryItem(){
-  //   // console.log('in gallery');
-  //   Axios
-  //     .post(`/api/cats/${this.state.cat}`, {
-  //       headers: { 'Authorization': 'Bearer ' + Auth.getToken() }
-  //     })
-  //     .then((item) => {
-  //       item.push(src);
-  //       const src = Object.assign({}, this.state.src, { [name]: item });
-  //       this.setState({ src });
-  //     })
-  //     .catch(err => console.log(err));
-  // }
 
   render() {
-    // console.log('cats show', this.state.cat);
+    console.log('cats show', this.state.cat);
     return (
       <div id="cat-show">
         {this.state.cat && <Cat

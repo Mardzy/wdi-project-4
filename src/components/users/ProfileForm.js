@@ -19,8 +19,9 @@ const ProfileForm = ({ handleChange, handleAddress, handleSubmit, user, address,
 
   return (
     <Container>
-      <div className="col-md-12">
+      <div className="page-banner">
         <BackButton history={history} />
+        <h2>Update Profile</h2>
       </div>
       <Form onSubmit={handleSubmit}>
         <FormGroup className={errors.name ? 'has-error' : ''}>
@@ -73,7 +74,7 @@ const ProfileForm = ({ handleChange, handleAddress, handleSubmit, user, address,
             value={user.base64 || user.imageSRC}
           />
         </FormGroup>
-        <Button>Submit</Button>
+        <Button outline className="add">Submit</Button>
       </Form>
     </Container>
 
