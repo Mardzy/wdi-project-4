@@ -3,6 +3,7 @@ import LoginForm from './LoginForm';
 import Axios from 'axios';
 import Auth from '../../lib/Auth';
 
+
 class Login extends React.Component {
 
   state = {
@@ -36,13 +37,15 @@ class Login extends React.Component {
 
   render() {
     return (
-      <LoginForm
-        credentials={this.state.credentials}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        error={this.state.error}
-        history={this.props.history}
-      />
+      <div>
+        <LoginForm
+          credentials={this.state.credentials}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          error={this.state.error}
+          history={this.props.history}
+        />
+      </div>
     );
   }
 }

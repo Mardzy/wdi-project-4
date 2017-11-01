@@ -1,4 +1,6 @@
 import React from 'react';
+import OAuthButton from '../utility/OAuthButton';
+
 import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const LoginForm = ({ handleChange, handleSubmit, credentials, error }) => {
@@ -40,6 +42,8 @@ const LoginForm = ({ handleChange, handleSubmit, credentials, error }) => {
         </Alert>}
         <Button outline>Submit</Button>
       </Form>
+      <OAuthButton provider="facebook">Login with Facebook</OAuthButton>
+
     </Container>
 
   );

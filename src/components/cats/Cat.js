@@ -12,7 +12,7 @@ const Cat =  ({name, age, gender, type, id, heroImage, deleteCat, show, owner })
         <h2>{name}</h2>
         <h6>Breed: <em>{type}</em></h6>
       </div>}
-      <Row className="show-row">
+      <Row>
         <Col className="info">
           {show && owner &&<div>
             <h5>{name} is a {age} old {gender} {type} cat.</h5>

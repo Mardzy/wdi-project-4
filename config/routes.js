@@ -5,6 +5,8 @@ const conversations = require('../controllers/conversations');
 const auth = require('../controllers/auth');
 const secureRoute = require('../lib/secureRoute');
 const imageUpload = require('../lib/imageUpload');
+const oauth  = require('../controllers/oauth');
+
 
 router.route('/cats')
   .get(cats.index)
@@ -55,6 +57,8 @@ router.route('/register')
 router.route('/login')
   .post(auth.login);
 
+router.route('/oauth/facebook')
+.post(oauth.facebook);
 router.all('/*', (req, res) => res.status(400).send('NOT FOUND'));
 
 
