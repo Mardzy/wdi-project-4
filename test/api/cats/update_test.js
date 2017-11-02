@@ -2,21 +2,26 @@
 //
 // const Cat = require('../../../models/cat');
 // const User = require('../../../models/user');
+// const jwt = require('jsonwebtoken');
+// const { secret } = require('../../../config/environment');
 //
-// const userData = [{
-//   name: 'Hermione',
-//   dob: '1990-04-15',
-//   email: 'h@h.com',
-//   password: 'password',
-//   passwordConfirmation: 'password',
-//   conversations: { message: 'hi'}
-// }];
-// describe('GET /api/cats/:id', () => {
+// describe('PUT /api/cats/:id', () => {
 //   let cat = null;
 //   let catData = null;
+//   let token = null;
+//
 //
 //   before(done => {
-//     User.create(userData)
+//     User.create({
+//       name: 'Hermione',
+//       dob: '1990-04-15',
+//       email: 'h@h.com',
+//       password: 'password',
+//       passwordConfirmation: 'password',
+//       conversations: { message: 'hi'}
+//     }, (err, user) => {
+//       token = jwt.sign({ userId: user.id }, secret, { expiresIn: '1hr' });
+//     })
 //       .then(users => {
 //         catData = [{
 //           name: 'Toki',
@@ -27,7 +32,7 @@
 //             description: 'Do you have treats!?',
 //             image: '/images/toki.jpg'
 //           }],
-//           owner: users[1],
+//           owner: users[0],
 //           comments: [],
 //           id: '59fa4677e30329760f2a26f1'
 //         }, {
@@ -55,16 +60,26 @@
 //     done();
 //   });
 //
+//   it('should return a 401 response', done => {
+//     api
+//       .put(`/api/cats/${cat.id}`)
+//       .set('Accept', 'application/json')
+//       .send(catData[1])
+//       .expect(401, done);
+//   });
+//
 //   it('should return a 200 response', done => {
 //     api
-//       .get(`/api/cats/${cat.id}`)
+//       .put(`/api/cats/${cat.id}`)
 //       .set('Accept', 'application/json')
+//       .set('Authorization', `Bearer ${token}`)
+//       .send(catData[1])
 //       .expect(200, done);
 //   });
 //
 //   it('should return an object', done => {
 //     api
-//       .get(`/api/cats/${cat.id}`)
+//       .put(`/api/cats/${cat.id}`)
 //       .set('Accept', 'application/json')
 //       .end((err, res) => {
 //         expect(res.body).to.be.an('object');
@@ -74,8 +89,10 @@
 //
 //   it('should return the correct data', done => {
 //     api
-//       .get(`/api/cats/${cat.id}`)
+//       .put(`/api/cats/${cat.id}`)
 //       .set('Accept', 'application/json')
+//       .set('Authorization', `Bearer ${token}`)
+//       .send(catData[0])
 //       .end((err, res) => {
 //         // console.log(res.body);
 //         const catItem = res.body;

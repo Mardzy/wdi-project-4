@@ -1,9 +1,10 @@
 import React from 'react';
 import Axios from 'axios';
 import {/*Container, Row,*/ Col, Button } from 'reactstrap';
-import Cat from './Cat';
+// import Cat from './Cat';
 import Auth from '../../lib/Auth';
 import CommentForm from '../utility/CommentForm';
+import CatGallery from './CatGallery';
 
 class CatsShow extends React.Component {
   state = {
@@ -64,11 +65,15 @@ class CatsShow extends React.Component {
     // console.log('cats show', this.state.cat);
     return (
       <div id="cat-show">
-        {this.state.cat && <Cat
+        {/* {this.state.cat && <Cat
           {...this.state.cat}
           show={true}
           deleteCat={this.deleteCat}
-        ></Cat>}
+        ></Cat>} */}
+        { this.state.cat &&
+          <CatGallery
+            gallery={this.state.cat.gallery}
+          ></CatGallery>}
         {authenticated && <CommentForm
           comment={this.state.comment}
           handleSubmit={this.handleSubmit}
