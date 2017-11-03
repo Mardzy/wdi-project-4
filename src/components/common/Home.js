@@ -14,6 +14,7 @@ class Home extends React.Component{
             <h1 className="two">C<span className="black">A</span><span className="white">T</span>  M<span className="black">A</span><span className="white">D</span></h1>
             <h1 className="three">C<span className="white">A</span><span className="ginger">T</span>   M<span className="white">A</span><span className="ginger">D</span></h1>
 
+            <h3>A social network for cat lovers</h3>
 
           </Col>
           <Col md={6} id="home-hero" className="pr-0"><HomeCarousel/></Col>

@@ -7,33 +7,31 @@ import {
   CarouselCaption
 } from 'reactstrap';
 
-const items = [
-  {
-    src: '../assets/images/big-moggie-infant.jpg',
-    caption: ''
-  }, {
-    src: '../assets/images/woman-cat.jpg',
-    caption: ''
-  }, {
-    src: '../assets/images/boy-ginger-cat.jpg',
-    caption: ''
-  }, {
-    src: '../assets/images/girl-ginger-cat.jpg',
-    caption: ''
-  }, {
-    src: '../assets/images/guy-black-cat.jpg',
-    caption: ''
-  }, {
-    src: '../assets/images/girl-white-cat.jpg',
-    caption: ''
-  }, {
-    src: '../assets/images/taylor-swift.jpg',
-    caption: ''
-  }, {
-    src: '../assets/images/kitten-biting.jpg',
-    caption: ''
-  }
-];
+const items = [{
+  src: '../assets/images/boy-ginger-cat.jpg',
+  caption: ''
+}, {
+  src: '../assets/images/girl-ginger-cat.jpg',
+  caption: ''
+}, {
+  src: '../assets/images/big-moggie-infant.jpg',
+  caption: ''
+}, {
+  src: '../assets/images/woman-cat.jpg',
+  caption: ''
+}, {
+  src: '../assets/images/guy-black-cat.jpg',
+  caption: ''
+}, {
+  src: '../assets/images/girl-white-cat.jpg',
+  caption: ''
+}, {
+  src: '../assets/images/taylor-swift.jpg',
+  caption: ''
+}, {
+  src: '../assets/images/kitten-biting.jpg',
+  caption: ''
+}];
 
 class HomeCarousel extends Component {
   constructor(props) {
