@@ -1,15 +1,17 @@
 import React from 'react';
 import Axios from 'axios';
-import {/*Container, Row,*/ Col, Button } from 'reactstrap';
-// import Cat from './Cat';
+import {Container, Col, Button } from 'reactstrap';
+import {Link} from 'react-router-dom';
+import BackButton from '../utility/BackButton';
+import Cat from './Cat';
 import Auth from '../../lib/Auth';
 import CommentForm from '../utility/CommentForm';
-import CatGallery from './CatGallery';
+
 
 class CatsShow extends React.Component {
   state = {
     cat: {},
-    comment: [],
+    comment: '',
     errors: {}
   };
 
@@ -49,49 +51,64 @@ class CatsShow extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     Axios
-      .post(`/api/users/${this.props.match.params.id}/comments`, { text: this.state.comment }, {
+      .post(`/api/cats/${this.props.match.params.id}/comments`, { text: this.state.comment }, {
         headers: { 'Authorization': 'Bearer ' + Auth.getToken() }
       })
-      .then(res => this.setState({ user: res.data, comment: '' }))
+      .then(res => this.setState({ cat: res.data, comment: '' }))
       .catch(err => console.log(err.response.data));
   }
-
   isOwner(comment) {
     return Auth.getPayload() && Auth.getPayload().userId === comment.createdBy.id;
   }
-
   render() {
+    const { owner, age, name, gender, type, comments } = this.state.cat;
     const authenticated = Auth.isAuthenticated();
     // console.log('cats show', this.state.cat);
     return (
-      <div id="cat-show">
-        {/* {this.state.cat && <Cat
-          {...this.state.cat}
-          show={true}
-          deleteCat={this.deleteCat}
-        ></Cat>} */}
-        { this.state.cat &&
-          <CatGallery
-            gallery={this.state.cat.gallery}
-          ></CatGallery>}
-        {authenticated && <CommentForm
-          comment={this.state.comment}
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-          errors={this.state.errors}
-        />}
-        {!this.state.cat.comments && <p>Loading comments...</p>}
-        {this.state.cat.comments && this.state.cat.comments.map(comment =>{
-          console.log('logging inside map comment',comment);
-          <Col key={comment.id}>
-            By: <small>{comment.createdBy.name}</small>
-            <p>{comment.text}</p>
-            {authenticated && /*this.isOwner(comment) &&*/
-              <Button className="round-delete" onClick={() => this.deleteComment(comment.id)}>X</Button>}
-          </Col>;
-        }
-        )}
-      </div>
+      <Container>
+        <div className="page-banner">
+          <BackButton history={history} />
+          <h2 className="headline">{name}`s Page</h2>
+          <div></div>
+        </div>
+        <div id="cat-show">
+
+
+          <div className="info">
+            { owner &&<div>
+              <h5>{name} is a {age} old {gender} {type} cat.</h5>
+              <p>Owner: {owner.name}</p>
+              <Link className="btn btn-outline profile" to={`/users/${owner.id}`}><img className="round-image" src={owner.imageSRC} /> Visit {owner.name}`s Profile</Link>
+              <h4>Comments</h4>
+              <div className="comment-body">
+                {comments && comments.map(comment =>{
+                  console.log(comment);
+                  return(
+                    <Col className="cat-comments" key={comment.id}>
+                      <Link className="btn btn-outline" to={`/users/${comment.createdBy.id}`}><img className="comment-image" src={comment.createdBy.imageSRC} /></Link>
+                      <p>{comment.text}</p>
+                      {authenticated && this.isOwner(comment) &&
+                      <Button className="round-delete" onClick={() => this.deleteComment(comment.id)}>X</Button>}
+                    </Col>);
+                }
+                )}
+              </div>
+              {authenticated && <CommentForm
+                comment={this.state.comment}
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+                errors={this.state.errors}
+              />}
+
+            </div>}
+          </div>
+          {this.state.cat && <Cat
+            {...this.state.cat}
+            show={true}
+            deleteCat={this.deleteCat}
+          ></Cat>}
+        </div>
+      </Container>
     );
   }
 }

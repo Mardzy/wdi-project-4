@@ -1,5 +1,5 @@
 /* global api, describe, it, expect, before, after */
-
+require('../helper');
 const Cat = require('../../../models/cat');
 const User = require('../../../models/user');
 const jwt = require('jsonwebtoken');

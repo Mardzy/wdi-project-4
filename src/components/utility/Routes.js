@@ -13,6 +13,7 @@ import ProfileEdit from '../users/ProfileEdit';
 import ConversationsIndex from '../conversations/ConversationsIndex';
 import ConversationsShow from '../conversations/ConversationsShow';
 import CatsImagesNew from '../cats/CatsImagesNew';
+import NoRoute from './NoRoute';
 
 const Routes = () => {
   return(
@@ -30,6 +31,7 @@ const Routes = () => {
       <ProtectedRoute path="/users/:id/edit" component={ProfileEdit} />
       <ProtectedRoute exact path="/conversations" component={ConversationsIndex} />
       <ProtectedRoute path="/conversations/:id" component={ConversationsShow} />
+      <Route to="/404" component={NoRoute} />
     </Switch>
   );
 };

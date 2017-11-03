@@ -1,0 +1,38 @@
+.conversation-show.container{
+  h2{
+    margin-bottom: 30px;
+  }
+}
+
+#conversations-show{
+  width: 50%;
+  height: 80vh;
+  img{
+    height: 50px;
+    width:  50px;
+  }
+  .btn.profile{
+    width: auto;
+  }
+  .conversation-body{
+    height: 55vh;
+    border: 1px lightGray solid;
+    border-radius: 6px;
+    overflow: scroll;
+  }
+  .message{
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 70px;
+    width: 100%;
+    flex-direction: column;
+
+    p{
+      margin: 0;
+    }
+    small{
+      margin: 15px 0 0 15px;
+    }
+  }
+}

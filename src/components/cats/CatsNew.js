@@ -76,7 +76,7 @@ class CatsNew extends React.Component {
         cat={this.state.cat}
         errors={this.state.errors}
         gallery={this.state.gallery}
-        catsNew={true}
+        create={true}
       />
     );
   }

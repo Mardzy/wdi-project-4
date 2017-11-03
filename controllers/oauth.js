@@ -81,7 +81,7 @@ function facebook(req, res, next) {
               name: profile.name
             });
           }
-          user.facbookId = profile.id;
+          user.facebookId = profile.id;
           if(profile.email) user.email = profile.email;
           user.image = profile.picture.data.url;
           return user.save((err)=> console.log(err));

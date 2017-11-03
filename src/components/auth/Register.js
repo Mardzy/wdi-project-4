@@ -1,6 +1,7 @@
 import React from 'react';
 import RegisterForm from './RegisterForm';
 import Axios from 'axios';
+import { Container } from 'reactstrap';
 
 class Register extends React.Component {
 
@@ -35,13 +36,15 @@ class Register extends React.Component {
 
   render() {
     return (
-      <RegisterForm
-        user={this.state.user}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        errors={this.state.errors}
-        history={this.props.history}
-      />
+      <Container className="register">
+        <RegisterForm
+          user={this.state.user}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          errors={this.state.errors}
+          history={this.props.history}
+        />
+      </Container>
     );
   }
 }

@@ -54,34 +54,37 @@ class Profile extends React.Component {
         <div className="page-banner">
           <BackButton history={this.props.history} />
           <h2>{name}`s Profile</h2>
+          <div></div>
         </div>
-        <div id="profile" className="container-fluid">
-
+        <div className="">
           <Row>
-            <Col md={2}>
+            <Col className="user">
               <div>
                 {imageSRC && <img className="profile-image" src={imageSRC} />}
                 <p>{bio}</p>
               </div>
-              {userId !== id &&<Button className="new-button" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {name}</Button>}
+              {userId !== id &&<Button className="add message" outline onClick={this.createConversation}><i className="fa fa-envelope" aria-hidden="true"></i> Message {name}</Button>}
               {authenticated && userId === id && <div className="buttons">
                 <Link className="btn btn-outline edit" to={`/users/${id}/edit`}>Edit Profile</Link>
-                <Button outline className="delete" onClick={this.deleteUser}>Delete Profile   </Button>
+                <Button outline className="delete" onClick={this.deleteUser}>Delete Profile</Button>
               </div>}
             </Col>
-            <Col id="cat-hero-col">
-              {cats && cats.map(cat => <Col id="profile-cats" key={cat.id}>
-                <h4>{cat.name}</h4>
-                {cat && <Link to={`/cats/${cat.id}`}>{cat.heroImage && <img src={cat.heroImage.imageSRC} />}</Link>}
-              </Col>
-              )}
-            </Col>
-            <Col>
+          </Row>
+          <Row>
+            <Col md={5}>
               {this.state.user.location && <GoogleMap
                 center={this.state.user.location}
               />}
             </Col>
+            <Col md={5} id="cat-hero-col">
+              {cats && cats.map(cat => <Col id="profile-cats" key={cat.id}>
+                <h4>{cat.name}</h4>
+                {cat && <Link to={`/cats/${cat.id}`}>{cat.heroImage && <img className="cat-profile" src={cat.heroImage.imageSRC} />}</Link>}
+              </Col>
+              )}
+            </Col>
           </Row>
+
         </div>
       </div>
     );

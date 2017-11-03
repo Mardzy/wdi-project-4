@@ -22,14 +22,16 @@ class MessageIndex extends React.Component{
   }
 
   render(){
-    console.log(Auth.getPayload());
+    // let emptyInbox = null; this.state.conversation.messages.length === null ? emptyInbox = <h4>Sorry no Messages yet..</h4> : null;
     const userId = Auth.getPayload() ? Auth.getPayload().userId : null;
     return(
       <Container id="conversations-index">
         <div className="page-banner">
           <BackButton history={history} />
           <h2>Inbox</h2>
+          <div></div>
         </div>
+        {/* {emptyInbox} */}
         {this.state.conversations && this.state.conversations.map(conversation =>
           <Row key={conversation.id}>
             {userId !== conversation.to.id &&

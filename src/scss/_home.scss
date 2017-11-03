@@ -1,0 +1,63 @@
+
+#home{
+  h1.one{
+    font-size: 104px;
+    font-weight: 700;
+    position: absolute;
+    background-color: transparent;
+    right: -224px;
+    top: 117px;
+    z-index: 1;
+    color: rgb(225, 215, 200);
+    text-shadow: 4px 0px 7px rgba(150, 150, 144, 1);
+    .ginger{
+      color: rgb(234, 169, 117);
+    }
+    .white{
+      color: rgb(225, 215, 200);
+    }
+    .black{
+      color: rgb(29, 35, 34);
+    }
+  }
+
+  .two{
+    @extend h1.one;
+    z-index: 2;
+    top:119px;
+    right: -221px;
+    color: rgb(234, 169, 117);
+
+  }
+  h1.three{
+    @extend h1.one;
+    z-index: 3;
+    color: rgb(29, 35, 34);
+    top:122px;
+    right: -218px;
+  }
+
+  .d-block.img-fluid{
+    height: 72vh;
+  }
+  a.carousel-control-prev-icon  {
+    background-image: none;
+    margin: 0;
+  }
+  a.carousel-control-nex-icon{
+    @extend .carousel-control-prev-icon;
+  }
+  li {background-color: transparent;}
+  .top{
+    height: 8vh
+  }
+  .middle{
+    height: 72vh;
+  }
+  .bottom{
+    @extend .top;
+  }
+  #home-info{
+    position: relative;
+  }
+}

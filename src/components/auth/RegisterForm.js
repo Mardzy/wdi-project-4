@@ -4,7 +4,8 @@ import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstr
 const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
   return (
 
-    <Container>
+    <Container className="login">
+      <h2>Register</h2>
       <Form onSubmit={handleSubmit}>
         <FormGroup className={errors.name ? 'has-error' : ''}>
           <Label for="name">Name</Label>

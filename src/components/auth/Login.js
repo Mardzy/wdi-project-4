@@ -2,7 +2,7 @@ import React from 'react';
 import LoginForm from './LoginForm';
 import Axios from 'axios';
 import Auth from '../../lib/Auth';
-
+import { Container } from 'reactstrap';
 
 class Login extends React.Component {
 
@@ -37,7 +37,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container className="register">
         <LoginForm
           credentials={this.state.credentials}
           handleChange={this.handleChange}
@@ -45,7 +45,7 @@ class Login extends React.Component {
           error={this.state.error}
           history={this.props.history}
         />
-      </div>
+      </Container>
     );
   }
 }

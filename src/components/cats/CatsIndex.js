@@ -28,12 +28,13 @@ class CatsIndex extends React.Component{
 
     return(
 
-      <Container>
+      <Container id="cat-index">
         <div className="page-banner">
           <BackButton history={history} />
           <h2>Cats to Visit</h2>
+          <div></div>
         </div>
-        <Row id="cat-index">
+        <Row >
           {this.state.cats && this.state.cats.map(cat =>
             <Col xs={12} sm={6} md={4} key={cat.id}>
               <Link to={`/cats/${cat.id}`}>

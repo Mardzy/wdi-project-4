@@ -22,7 +22,7 @@ toggle() {
 render() {
   return (
     <Router>
-      <main className="container-fluid">
+      <main>
         <CatMadNavbar
           isOpen={this.state.isOpen}
           toggle={this.toggle}

@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
+
 
 const messageSchema = new mongoose.Schema({
   text: { type: String, required: true },
@@ -7,6 +9,11 @@ const messageSchema = new mongoose.Schema({
 }, {
   timestamps: true
 });
+
+messageSchema.path('createdAt')
+  .get(function formatSentTime(createdAt) {
+    return moment(createdAt).format('YYYY-MM-DD');
+  });
 
 const conversationSchema = new mongoose.Schema({
   from: { type: mongoose.Schema.ObjectId, ref: 'User' },

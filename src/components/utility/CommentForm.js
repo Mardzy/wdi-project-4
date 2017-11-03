@@ -4,9 +4,9 @@ import {Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 function CommentForm({ comment, handleSubmit, handleChange, errors }) {
   return (
-    <Form onSubmit={handleSubmit} className="col-md-6">
+    <Form id="comments" onSubmit={handleSubmit}>
       <FormGroup className={errors.comment ? ' has-error' : ''}>
-        <Label id="reviews" for="comment">Reviews</Label>
+        <Label id="reviews" for="comment"></Label>
         <Input
           type="text"
           className="form-control"

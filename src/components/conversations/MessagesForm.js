@@ -4,7 +4,7 @@ import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 const MessagesForm = ({ handleChange, handleSubmit, message, errors }) => {
   // console.log('message =>', message);
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="messages-form" onSubmit={handleSubmit}>
       <FormGroup className={errors.text ? 'has-error' : ''}>
         <Label for="text">Message</Label>
         <Input
@@ -18,10 +18,10 @@ const MessagesForm = ({ handleChange, handleSubmit, message, errors }) => {
           <small>{errors}</small>
         </Alert>}
       </FormGroup>
-      {/* {errors.invalid && <Alert color="danger">
+      {errors.invalid && <Alert color="danger">
         <small>{errors.invalid}</small>
-      </Alert>} */}
-      <Button outline>Submit</Button>
+      </Alert>}
+      <Button className="add" outline>Submit</Button>
     </Form>
   );
 };

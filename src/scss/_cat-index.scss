@@ -1,14 +1,27 @@
 #cat-index{
   h2{
-    font-size: 16px;
+    margin-bottom: 20px;
   }
-  div.info.col{
-    display: none;
+  .name-type{
+    display: flex;
+    align-items: baseline;
+    h6{
+      margin-left: 10px;
+    }
+  }
+  div.row{
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
   }
   img#hero{
-    height: 300px;
-    width:300px;
+    height: 200px;
+    width:200px;
     object-fit: cover;
-    border-radius: 3%;
+    border-radius: 6px;
+  }
+  .buttons{
+    display: flex;
+    align-items: center;
   }
 }

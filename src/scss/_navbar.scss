@@ -1,7 +1,16 @@
 #cat-mad-navbar{
-
+  padding: 10px 30px;
+  .navbar-brand{
+    font-weight: 700;
+  }
+  img{
+    height: 25px;
+    width: 25px;
+    margin-right: 20px
+  }
   .nav-link{
     color: green;
     font-size: 16px;
+    padding-right: 40px
   }
 }

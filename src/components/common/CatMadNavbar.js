@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import Auth from '../../lib/Auth';
 
@@ -7,9 +7,7 @@ const CatMadNavbar =  ({history, toggle, isOpen}) => {
   const authenticated = Auth.isAuthenticated();
   let currentUser = null;
   if (authenticated) currentUser = Auth.getPayload().userId;
-  let profileLink = null;
-  if(!currentUser && authenticated) return null;
-  else profileLink = <Link to={`/users/${currentUser}`} >Profile</Link>;
+
 
   function logout(e) {
     e.preventDefault();
@@ -20,28 +18,30 @@ const CatMadNavbar =  ({history, toggle, isOpen}) => {
   return (
     <div >
       <Navbar id="cat-mad-navbar" expand="md">
-        <NavbarBrand href="/">CatMad</NavbarBrand>
+        <NavbarBrand href="/"><img src="/assets/images/cat-icon.png"/> Cat Mad</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              {!currentUser && authenticated &&<NavLink href={`/users/${currentUser}`} >Profile</NavLink>}
+              {currentUser && authenticated &&<NavLink href={`/users/${currentUser}`} >Profile</NavLink>}
             </NavItem>
             <NavItem>
-              <NavLink href="/conversations">Inbox</NavLink>
+              {authenticated &&<NavLink href="/conversations">Inbox</NavLink>}
             </NavItem>
             <NavItem>
-              <NavLink href="/new">Add a Cat</NavLink>
+              {authenticated &&<NavLink href="/new">Add a Cat</NavLink>}
             </NavItem>
-            <Link to="/index">All Cats</Link>
             <NavItem>
-              <NavLink href="/login" >Login</NavLink>
+              <NavLink href="/index">All Cats</NavLink>
+            </NavItem>
+            <NavItem>
+              {!authenticated &&<NavLink href="/login" >Login</NavLink>}
             </NavItem>
             {<NavItem>
-              <NavLink href="/register">Register</NavLink>
+              {!authenticated &&<NavLink href="/register">Register</NavLink>}
             </NavItem>}
             {authenticated && <NavItem>
-              <NavLink href="#" onClick={logout}>Logout</NavLink>
+              {authenticated &&<NavLink href="#" onClick={logout}>Logout</NavLink>}
             </NavItem>}
 
           </Nav>

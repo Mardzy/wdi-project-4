@@ -1,11 +1,19 @@
-// @import "node_modules/react-image-gallery/styles/scss/image-gallery.scss";
+@import "variables";
 @import "drag-drop";
+@import "navbar";
 @import "cat-show";
 @import "cat-index";
+@import "conversations-index";
+@import "conversations-show";
 @import "profile";
 @import "buttons";
 @import "forms";
-@import "navbar";
+@import "home";
+@import "no-route";
+
+*{
+  font-family: 'Ubuntu', sans-serif;
+}
 img{
   width: 100%;
 }

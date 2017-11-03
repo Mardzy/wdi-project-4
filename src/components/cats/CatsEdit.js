@@ -54,6 +54,7 @@ class CatsEdit extends React.Component {
         handleChange={this.handleChange}
         cat={this.state.cat}
         errors={this.state.errors}
+        update={true}
       />
     );
   }

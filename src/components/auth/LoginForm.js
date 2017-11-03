@@ -5,7 +5,8 @@ import {Container, Alert, Button, Form, FormGroup, Label, Input } from 'reactstr
 
 const LoginForm = ({ handleChange, handleSubmit, credentials, error }) => {
   return (
-    <Container>
+    <Container className="login">
+      <h2>Login</h2>
       <Form onSubmit={handleSubmit}>
         <FormGroup className={error.email ? 'has-error' : ''}>
           <Label for="email">Email</Label>

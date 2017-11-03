@@ -1,0 +1,15 @@
+#conversations-index{
+  div.row{
+    display: flex;
+    justify-content: center;
+  }
+  a.btn{
+    margin: 25px 0;
+    padding: 20px;
+    display: flex;
+    border: 2px rgb(232, 231, 232) solid;
+    width: 35%;
+    border-radius: 5px;
+    box-shadow: $inset;
+  }
+}

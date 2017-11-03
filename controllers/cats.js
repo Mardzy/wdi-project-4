@@ -23,7 +23,7 @@ function catsShow(req, res, next) {
   // console.log(req.params.id);
   Cat
     .findById(req.params.id)
-    .populate('owner')
+    .populate('owner comments.createdBy')
     .exec()
     .then((cat) => {
       if(!cat) return res.notFound();
@@ -117,13 +117,14 @@ function createComment(req, res, next) {
     .findById(req.params.id)
     .populate('comments.createdBy')
     .exec()
-    .then((user) => {
-      user.comments.push(req.body);
-      return user.save();
+    .then((cat) => {
+      cat.comments.push(req.body);
+      return cat.save();
     })
-    .then((user) => {
-      res.json(user);
+    .then((cat) => {
+      return Cat.populate(cat, {path: 'owner'});      
     })
+    .then(cat => res.json(cat))
     .catch(next);
 }
 
@@ -132,15 +133,15 @@ function deleteComment(req, res, next) {
   Cat
     .findById(req.params.id)
     .exec()
-    .then((user) => {
-      if(!user) return res.notFound();
+    .then((cat) => {
+      if(!cat) return res.notFound();
 
-      const comment = user.comments.id(req.params.commentId);
+      const comment = cat.comments.id(req.params.commentId);
       comment.remove();
 
-      return user.save();
+      return cat.save();
     })
-    .then((user) => res.json(user))
+    .then((cat) => res.json(cat))
     .catch(next);
 }
 

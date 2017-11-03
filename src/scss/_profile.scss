@@ -1,15 +1,24 @@
 #profile{
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  .col.col-md-2{
+  .col.user{
     padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     .buttons{
-      display: inline-block;
+      display: flex;
+      justify-content: space-around;
+      align-content: center;
+      margin-bottom: 30px;
+      .delete{
+        height:40px;
+        margin: 5px 0 5px 20px;
+        text-align: center;
+        padding: 0;
+      }
+    }
+    p{
+      text-align: center;
     }
   }
   img.profile-image{
@@ -19,27 +28,36 @@
     border-radius: 50%;
   }
   #profile-cats{
-    margin-top: -32px;
-
-    display: flex;
-    flex-direction: column;
-    align-content: space-around;
-    align-items: center;
-    img{
-      height: 50vh;
-      object-fit: cover;
-      border-radius: 5px;
+    @extend .col-md-5;
+    position: relative;
+    h4{
+      position: absolute;
+      z-index: 2;
+      color: white;
+      text-shadow: 1px 1px 1px darkGray;
+      bottom: 0;
+      padding-left: 10px;
     }
   }
+  div.row{
+    display: flex;
+    justify-content: center;
+  }
+  .col-md-5{
+    display: flex;
+    justify-content: space-around;
+  }
 
-  #cat-hero-col{
-    overflow: scroll;
-    height: 80vh;
+  .cat-profile{
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 6px;
   }
 
   .google-map{
-    height:50vh;
-    width: 100%;
+    height:300px;
+    width: 300px;
     border-radius: 5px;
     border: lightGray 1px solid;
   }

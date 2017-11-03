@@ -1,49 +1,97 @@
-a.btn{
-}
 
 .btn.edit{
-  border: 2px solid rgb(205, 90, 36);
+  border: 2px solid $edit;
+  transition: $ease;
   margin: 5px 0;
-  color: rgb(205, 90, 36);
+  color: $edit;
   font-weight: bolder;
   width: 125px;
+  &:hover {
+    background-color: white;
+    color: lighten( $edit, 15%);
+    border: lighten( $edit, 15%) 2px solid;
+  }
 }
 
 .btn.facebook{
-  background-color: rgb(50, 89, 162);
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.btn.add{
-  color: rgb(104, 140, 96);
+  background-color: white;
+  transition: $ease;
   font-weight: bolder;
-  border: rgb(104, 140, 96) 2px solid;
+  color: $facebook;
+  border: 2px solid $facebook;
+  cursor: pointer;
+  &:hover {
+    background-color: white;
+    color: lighten( $facebook, 15%);
+    border: lighten( $facebook, 15%) 2px solid;
+  }
+}
+.btn.add.message{
+  width: auto;
+}
+.btn.add{
+  color: $add;
+  transition: $ease;
+  font-weight: bolder;
+  border: $add 2px solid;
   cursor: pointer;
   width: 125px;
   &:hover {
     background-color: white;
+    color: lighten( $add, 15%);
+    border: lighten( $add, 15%) 2px solid;
   }
 }
 
 .btn.back{
   border: none;
-  color: rgb(49, 48, 51);
+  transition: $ease;
+  color: $add;
   cursor: pointer;
-  width: 125px;
+  padding: 0;
+  margin: 0;
   &:hover {
     background-color: white;
+    color: lighten( $add, 15%);
   }
 }
 
 .btn.delete{
-  color: rgb(159, 11, 14);
-  border: rgb(159, 11, 14) 2px solid;
+  transition: $ease;
+  color: $delete;
+  border: $delete 2px solid;
+  margin: 0;
   cursor: pointer;
   font-weight: bolder;
   width: 125px;
   &:hover {
     background-color: white;
+    color: lighten( $delete, 8%);
+    border: lighten( $delete, 8%) 2px solid;
   }
+}
+
+.round-delete{
+  cursor: pointer;
+  transition: $ease;
+  background-color: $delete;
+  height:20px;
+  width: 20px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 9px;
+  line-height: 9px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  &:hover {
+    background-color:lighten( $delete, 4%);
+
+  }
+}
+.btn.profile{
+  box-shadow: $inset;
+  padding: 20px;
+  width: 100%;
+  border-radius: 6px;
 }
