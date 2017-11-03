@@ -18,7 +18,9 @@ const CatMadNavbar =  ({history, toggle, isOpen}) => {
   return (
     <div >
       <Navbar id="cat-mad-navbar" expand="md">
-        <NavbarBrand href="/"><img src="/assets/images/cat-icon.png"/> Cat Mad</NavbarBrand>
+        <NavbarBrand href="/"><img src="/assets/images/cat-icon.png"/> <h1 className="one">C<span className="ginger">A</span><span className="black">T</span>   M<span className="ginger">A</span><span className="black">D</span></h1>
+        <h1 className="two">C<span className="black">A</span><span className="white">T</span>  M<span className="black">A</span><span className="white">D</span></h1>
+        <h1 className="three">C<span className="white">A</span><span className="ginger">T</span>   M<span className="white">A</span><span className="ginger">D</span></h1></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>

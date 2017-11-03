@@ -1,40 +1,50 @@
 
 #home{
-  h1.one{
+  h1 {
     font-size: 104px;
-    font-weight: 700;
-    position: absolute;
-    background-color: transparent;
-    right: -224px;
-    top: 117px;
-    z-index: 1;
-    color: rgb(225, 215, 200);
-    text-shadow: 4px 0px 7px rgba(150, 150, 144, 1);
+    font-weight: 400;
+    font-family: 'Monoton', cursive;
+    text-transform: capitalize;
     .ginger{
+      @extend h1;
+
       color: rgb(234, 169, 117);
     }
     .white{
+      @extend h1;
+
       color: rgb(225, 215, 200);
     }
     .black{
+      @extend h1;
+
       color: rgb(29, 35, 34);
     }
   }
+  .one{
+    position: absolute;
+    background-color: transparent;
+    right: -222px;
+    top: 118px;
+    z-index: 1;
+    color: rgb(225, 215, 200);
+    text-shadow: 4px 0px 7px rgba(150, 150, 144, 1);
+  }
 
   .two{
-    @extend h1.one;
+    position: absolute;
     z-index: 2;
-    top:119px;
-    right: -221px;
+    right: -220px;
+    top:120px;
     color: rgb(234, 169, 117);
-
   }
-  h1.three{
-    @extend h1.one;
+
+  .three{
+    position: absolute;
     z-index: 3;
     color: rgb(29, 35, 34);
+    right: -219px;
     top:122px;
-    right: -218px;
   }
 
   .d-block.img-fluid{

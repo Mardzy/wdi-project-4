@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeCarousel from '../utility/HomeCarousel';
-import {Row, Col, Jumbotron} from 'reactstrap';
+import {Row, Col} from 'reactstrap';
 
 class Home extends React.Component{
   render(){
@@ -10,9 +10,9 @@ class Home extends React.Component{
         <Row className="middle">
           <Col md={6} id="home-info">
 
-            <h1 className="one">C<span className="ginger">a</span><span className="black">t</span> M<span className="ginger">a</span><span className="black">d</span></h1>
-            <h1 className="two">C<span className="black">a</span><span className="white">t</span> M<span className="black">a</span><span className="white">d</span></h1>
-            <h1 className="three">C<span className="white">a</span><span className="ginger">t</span> M<span className="white">a</span><span className="ginger">d</span></h1>
+            <h1 className="one">C<span className="ginger">A</span><span className="black">T</span>   M<span className="ginger">A</span><span className="black">D</span></h1>
+            <h1 className="two">C<span className="black">A</span><span className="white">T</span>  M<span className="black">A</span><span className="white">D</span></h1>
+            <h1 className="three">C<span className="white">A</span><span className="ginger">T</span>   M<span className="white">A</span><span className="ginger">D</span></h1>
 
 
           </Col>
