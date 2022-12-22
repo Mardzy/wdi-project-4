@@ -23,7 +23,7 @@
     "bootstrap": "4.0.0-beta",
     "express": "^4.16.2",
     "font-awesome": "^4.7.0",
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "^9.0.0",
     "moment": "^2.19.1",
     "mongoose": "^4.12.4",
     "mongoose-unique-validator": "^1.0.6",
